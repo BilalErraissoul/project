@@ -224,7 +224,7 @@
             <div class="quick-access">
                 <h2>Accès Rapide</h2>
                 <ul>
-                    <li><a href="events">Événements</a></li>
+                    <li><a href="{{ route('events.index') }}">Événements</a></li>
                     <li><a href="#">Articles</a></li>
                     <li><a href="#">Départements</a></li>
                     <li><a href="#">Annonces</a></li>
