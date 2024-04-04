@@ -49,7 +49,7 @@ class EventController extends Controller
             'date_event' => 'required|date',
         ]);
     
-        $input = $request->all();
+        $input = $request->all(); 
     
         if ($image = $request->file('image')) {
             $destinationPath = 'images/';
@@ -57,7 +57,15 @@ class EventController extends Controller
             $image->move($destinationPath, $profileImage);
             $input['image'] = $profileImage;
         }
+
+        $isépingler=0;
+        if ($request->has('épingler')) {
+            $isépingler=1;
+        } else {
+            $isépingler=0;
+        }
       
+        $input['épingler'] = $isépingler;
         Event::create($input);
        
         return redirect()->route('events.index')

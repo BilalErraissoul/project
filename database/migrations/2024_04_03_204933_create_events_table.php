@@ -14,6 +14,7 @@ class CreateEventsTable extends Migration
             $table->text('description_event'); // Changed from 'detail' to 'description_event'
             $table->date('date_event'); // Added 'date_event' column
             $table->string('image'); // Moved 'image' column after 'date_event'
+            $table->integer('épingler');  
             $table->timestamps();
         });
     }
