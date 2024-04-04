@@ -51,6 +51,12 @@
                 <input type="file" name="image" class="form-control" placeholder="Image">
             </div>
         </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
+            <div class="form-group"> 
+                <input type="checkbox" name="épingler" id="épingler" >
+                <label for="épingler"><strong>épingler</strong></label>
+            </div>
+        </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
