@@ -7,12 +7,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"  />
     <link
   rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+/>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-       
+        
+      
 
         /* Carousel Styles */
         .carousel-item img {
@@ -77,8 +79,8 @@
     </style>
 </head>
 <body>
-    @include('header')
-
+    
+@include('header')
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         var dropdownToggle = document.querySelector('.dropdown-toggle');
@@ -106,10 +108,13 @@
                 <!-- Additional required wrapper -->
                 <div class="swiper-wrapper">
                   <!-- Slides -->
-                  @foreach ($eventsCursor as $event)
+                  @foreach ($departements as $departement)
                     <div class=" swiper-slide ">
-                        <img src="/images/{{ $event->image }}" class="d-block w-100" alt="{{  $event->name_event}}">
-                       
+                        <img src="/images/{{ $departement->image }}" class="d-block w-100" alt="{{  $departement->name_departement}}">
+                        <div  >
+                            <h5>{{  $departement->name_departement}}</h5>
+                            <p>Some description about the slide.</p>
+                        </div>
                     </div>
                     @endforeach  
 
@@ -130,65 +135,77 @@
         </div>
     </div>
     <hr style="border-top: 2px solid #003366; margin-top: 20px; margin-bottom: 20px;">
-    
 
-    <div class="container-fluid bg-gradient">
     <div class="row justify-content-between">
-        <div class="col-lg-9">  
-            <h1 class="mb-4" style="color: #003366; font-size: 36px; font-weight: bold;">LISTE DES EVENEMENTS</h1>
-            <!-- Events Section -->
-            @foreach ($eventsEpingler as $event)
-                <div class="event-item mb-4 p-3" style="background-color: #f8f9fa; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                    <div class="progress mb-2" style="height: 2px;">
-                        <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <div class="row align-items-center">
-                        <div class="col-md-5 position-relative overflow-hidden">
-                            <img src="/images/{{ $event->image }}" class="img-fluid rounded" alt="{{ $event->name_event }}">
-                            <div class="position-absolute top-0 start-3 p-2 bg-danger rounded-circle">
-                                <i class="fas fa-bell text-white"></i>
-                            </div>
-                        </div>
-                        <div class="col-md-7">
-                            <h5>{{ $event->name_event }}</h5>
-                            <div class="description-container" style="max-height: 5em; overflow: hidden; position: relative;">
-                                <p class="description-text" style="margin: 0;">{{ $event->description_event }}</p>
-                                <span class="more-indicator" style="position: absolute; bottom: 0; right: 0;">...</span>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center" style="margin-top: 10px;">
-                                <a href="{{ route('events.show',['event'=>$event->id]) }}" class="text-primary">En savoir plus</a>
-                                <p style="margin-bottom: 0;">{{ \Carbon\Carbon::parse($event->created_at)->format('D M d Y H:i') }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-
-            @foreach ($events as $event)
-                <div class="event-item mb-4 p-3" style="background-color: #f8f9fa; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                    <div class="progress mb-2" style="height: 2px;">
-                        <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <div class="row align-items-center">
-                        <div class="col-md-5">
-                            <img src="/images/{{ $event->image }}" class="img-fluid rounded" alt="{{ $event->name_event }}">
-                        </div>
-                        <div class="col-md-7">
-                            <h5>{{ $event->name_event }}</h5>
-                            <div class="description-container" style="max-height: 5em; overflow: hidden; position: relative;">
-                                <p class="description-text" style="margin: 0;">{{ $event->description_event }}</p>
-                                <span class="more-indicator" style="position: absolute; bottom: 0; right: 0;">...</span>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center" style="margin-top: 10px;">
-                                <a href="{{ route('events.show',['event'=>$event->id]) }}" class="text-primary">En savoir plus</a>
-                                <p style="margin-bottom: 0;">{{ \Carbon\Carbon::parse($event->created_at)->format('D M d Y H:i') }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-            
+    <div class="col-lg-9">  
+        <h1 class="mb-4" style="color: #003366; font-size: 36px; font-weight: bold;">LISTE DES DÉPARTEMENTS</h1>
+        <div class="container">
+    <!-- Afficher les départements épinglés -->
+    @foreach ($departementsEpingler as $departement)
+    <div class="departement mb-4 p-3" style="background-color: #f8f9fa; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <div class="progress mb-2" style="height: 2px;">
+            <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
+        <div class="row align-items-center">
+            <div class="col-md-4">
+                <div class="position-relative overflow-hidden">
+                    <div class="position-absolute top-0 start-0 p-2 bg-danger rounded-circle" style="font-size: 20px;">
+                        <i class="fas fa-bell text-white"></i>
+                    </div>
+                    <!-- Remplacer 'image' et 'name_departement' par les noms des attributs correspondants dans votre modèle -->
+                    <img src="/images/{{ $departement->image }}" class="img-fluid rounded" alt="{{ $departement->name_departement }}" style="object-fit: cover; object-position: center; width: 100%;">
+                </div>
+            </div>
+            <div class="col-md-8">
+                <h5 class="fw-bold text-dark" style="font-size: 20px;">{{ $departement->name_departement }}</h5>
+                <div class="departement-description" style="height: 72px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; font-size: 16px;">
+                    <!-- Remplacer 'description_departement' par le nom de l'attribut correspondant dans votre modèle -->
+                    <p class="text-muted">{{ $departement->description_departement }}</p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="{{ route('departements.show',['departement'=>$departement->id]) }}" class="text-primary" style="font-size: 18px;">Lire la suite</a>
+                    <!-- Assurez-vous que 'created_at' est un attribut valide dans votre modèle -->
+                    <p class="text-muted m-0" style="font-size: 18px;">{{ \Carbon\Carbon::parse($departement->created_at)->format('D M d Y H:i') }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endforeach
+    
+    <!-- Afficher les départements non épinglés -->
+    @foreach ($departements as $departement)
+    @if (!$departementsEpingler->contains($departement))
+    <div class="departement mb-4 p-3" style="background-color: #f8f9fa; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <div class="progress mb-2" style="height: 2px;">
+            <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <div class="row align-items-center">
+            <div class="col-md-4">
+                <!-- Remplacer 'image' et 'name_departement' par les noms des attributs correspondants dans votre modèle -->
+                <img src="/images/{{ $departement->image }}" class="img-fluid rounded" alt="{{ $departement->name_departement }}" style="object-fit: cover; object-position: center; width: 100%;">
+            </div>
+            <div class="col-md-8">
+                <h5 class="fw-bold text-dark" style="font-size: 20px;">{{ $departement->name_departement }}</h5>
+                <div class="departement-description" style="height: 72px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; font-size: 16px;">
+                    <!-- Remplacer 'description_departement' par le nom de l'attribut correspondant dans votre modèle -->
+                    <p class="text-muted">{{ $departement->description_departement }}</p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="{{ route('departements.show',['departement'=>$departement->id]) }}" class="text-primary" style="font-size: 18px;">Lire la suite</a>
+                    <!-- Assurez-vous que 'created_at' est un attribut valide dans votre modèle -->
+                    <p class="text-muted m-0" style="font-size: 18px;">{{ \Carbon\Carbon::parse($departement->created_at)->format('D M d Y H:i') }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+    @endforeach
+</div>
+</div>
+
+
+
+        
         <div class="col-lg-3">
             <div class="quick-access">
                 <h2>Accès Rapide</h2>
@@ -230,7 +247,8 @@
                 <span class="badge bg-primary">6</span>
             </li>
         </ul>
-    </div>
+    
+                        </div>
                     </div>
                     <div class="panel panel-primary">
                         <div class="panel-heading">
@@ -268,56 +286,6 @@
         </div>
     </div> 
 </div> 
-        <div class="container-fluid bg-gradient">
-    <div class="row justify-content-between">
-        <div class="col-lg-6">
-            <div class="mb-4">
-                <h2 class="text-primary">ARTICLES</h2>
-                <!-- Articles Section -->
-                @foreach ($articles as $article)
-                @if ($loop->index < 2)
-                    <div class="card mb-3">
-                        <img src="/images/{{ $article->image }}" class="card-img-top" alt="{{ $article->name }}" style="max-height: 150px; object-fit: cover;">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $article->name }}</h5>
-                            <p class="card-text" style="max-height: 70px; overflow: hidden;">{{ $article->description_article }}</p>
-                            <a href="{{ route('articles.show',['article'=>$article->id]) }}" class="btn btn-primary btn-sm">Lire la suite</a>
-                            <p class="card-text"><small class="text-muted">{{ \Carbon\Carbon::parse($article->created_at)->format('D M d Y H:i') }}</small></p>
-                        </div>
-                    </div>
-                @endif
-            @endforeach
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="mb-4">
-            <h2 class="text-danger">ANNONCES</h2>
-            <!-- Announcements Section -->
-            @foreach ($annonces as $annonce)
-                @if ($loop->index < 2)
-                    <div class="card mb-3">
-                        <img src="/images/{{ $annonce->image }}" class="card-img-top" alt="{{ $annonce->name_annonce }}" style="max-height: 150px; object-fit: cover;">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $annonce->name_annonce }}</h5>
-                            <p class="card-text" style="max-height: 70px; overflow: hidden;">{{ $annonce->description_annonce }}</p>
-                            <a href="{{ route('annonces.show',['annonce'=>$annonce->id]) }}" class="btn btn-danger btn-sm">Lire la suite</a>
-                            <p class="card-text"><small class="text-muted">{{ \Carbon\Carbon::parse($annonce->created_at)->format('D M d Y H:i') }}</small></p>
-                        </div>
-                    </div>
-                @endif
-            @endforeach
-        </div>
-        </div>
-    </div>
-</div>
-
-
-       
-      
-
-        
-   
-    
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>

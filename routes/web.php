@@ -1,23 +1,33 @@
 <?php
   
-use Illuminate\Support\Facades\Route;
+  use Illuminate\Support\Facades\Route;
   
-use App\Http\Controllers\SliderController;
-use App\Http\Controllers\EventController;
+  use App\Http\Controllers\SliderController;
+  use App\Http\Controllers\EventController;
+  use App\Http\Controllers\ArticleController;
+  use App\Http\Controllers\AnnonceController;
+  use App\Http\Controllers\AdminController;
+  use App\Http\Controllers\ServiceController;
+  use App\Http\Controllers\DepartementController;
+  
+  Route::resource('events', EventController::class);
+  Route::get('/articles/listeArticles', [ArticleController::class, 'articles'])->name('articles');
+  Route::get('/annonces/listeAnnonces', [AnnonceController::class, 'annonces'])->name('annonces');
+  Route::get('/departements/listeDepartements', [DepartementController::class, 'departements'])->name('departements');
+  Route::get('/services/listeServices', [ServiceController::class, 'services'])->name('services');
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
+  Route::resource('annonces', AnnonceController::class);
+  Route::resource('articles', ArticleController::class);
+  Route::resource('services', ServiceController::class);
+  Route::resource('departements', DepartementController::class);
+  
+  Route::get('sliders', [SliderController::class, 'index'])->name('sliders');
+  Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+  Route::get('/admin/articles', [AdminController::class, 'articles'])->name('admin.articles');
+  Route::get('/admin/events', [AdminController::class, 'events'])->name('admin.events');
+  Route::get('/admin/services', [AdminController::class, 'services'])->name('admin.services');
+  Route::get('/admin/departements', [AdminController::class, 'departements'])->name('admin.departements');
+  Route::post('/update-checkbox', 'App\Http\Controllers\AnnonceController@updateCheckbox')->name('update.annonces.checkbox');
 
-Route::resource('events', EventController::class);
-
-    
-Route::get('sliders', [SliderController::class, 'index']);
+  

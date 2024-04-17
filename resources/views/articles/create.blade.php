@@ -1,12 +1,13 @@
-@extends('events.layout')
+@extends('articles.layout')
 
 @section('content')
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h2 class="card-title">Add New Event</h2>
+                    <h2 class="card-title">Add New Article</h2>
                 </div>
 
                 <div class="card-body">
@@ -21,22 +22,22 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('events.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('articles.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group">
                             <label for="name">Name:</label>
-                            <input type="text" name="name_event" class="form-control" placeholder="Enter name">
+                            <input type="text" name="name" class="form-control" placeholder="Enter name">
                         </div>
 
                         <div class="form-group">
                             <label for="description">Description:</label>
-                            <textarea class="form-control" name="description_event" rows="5" placeholder="Enter description"></textarea>
+                            <textarea class="form-control" name="description_article" rows="5" placeholder="Enter description"></textarea>
                         </div>
 
                         <div class="form-group">
                             <label for="date">Date:</label>
-                            <input type="date" name="date_event" class="form-control">
+                            <input type="date" name="date_article" class="form-control">
                         </div>
 
                         <div class="form-group">
@@ -46,11 +47,11 @@
 
                         <div class="form-group">
                             <input type="checkbox" name="épingler" id="épingler">
-                            <label for="épingler">Pin this event</label>
+                            <label for="épingler">Pin this article</label>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Submit</button>
-                        <a href="{{ route('events.index') }}" class="btn btn-secondary">Cancel</a>
+                        <a href="{{ route('articles.index') }}" class="btn btn-secondary">Cancel</a>
                     </form>
                 </div>
             </div>
