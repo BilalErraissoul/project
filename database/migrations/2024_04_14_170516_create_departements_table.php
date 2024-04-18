@@ -15,6 +15,9 @@ class CreateDepartementsTable extends Migration
             $table->date('date_departement');
             $table->string('image');
             $table->integer('épingler');
+            $table->boolean('special')->default(false);  
+            $table->boolean('carousel')->default(false);  
+            $table->boolean('home')->default(false);  
             $table->timestamps();
         });
     }

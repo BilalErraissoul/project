@@ -91,10 +91,16 @@
                         <td>{{ $departement->name_departement }}</td>
                         <td>{{ Str::words($departement->description_departement, 10, '...') }}</td>
                         <td>{{ $departement->date_departement }}</td>
-                        <td class="text-center"><input type="checkbox" class="form-check-input"></td>
-                        <td class="text-center"><input type="checkbox" class="form-check-input"></td>
-                        <td class="text-center"><input type="checkbox" class="form-check-input"></td>
                         <td>
+                            <input type="checkbox" class="checkbox" data-item-id="{{ $departement->id }}" data-field="special" {{ $departement->special ? 'checked' : '' }} onclick="updateCheckbox('{{ $departement->id }}', 'special')">
+                           </td>
+                           <td>
+                            <input type="checkbox" class="checkbox" data-item-id="{{ $departement->id }}" data-field="carousel" {{ $departement->carousel ? 'checked' : '' }} onclick="updateCheckbox('{{ $departement->id }}', 'carousel')">
+                            </td>
+                            <td>
+                            <input type="checkbox" class="checkbox" data-item-id="{{ $departement->id }}" data-field="home" {{ $departement->home ? 'checked' : '' }} onclick="updateCheckbox('{{ $departement->id }}', 'home')">
+                            </td>
+                         <td>
                             <div class="btn-group" role="group" aria-label="Actions">
                                 <a class="btn btn-info btn-sm" href="{{ route('departements.show',$departement->id) }}">Show</a>
                                 <a class="btn btn-primary btn-sm" href="{{ route('departements.edit',$departement->id) }}">Edit</a>
@@ -178,6 +184,26 @@
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function updateCheckbox(id, field) {
+            $.ajax({
+                url: '/update-checkboxDepartement',
+                method: 'POST',
+                data: {
+                    id: id,
+                    field: field,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(xhr) {
+                    console.error(xhr.responseText);
+                }
+            });
+        }
+    </script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         ClassicEditor

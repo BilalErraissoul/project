@@ -154,5 +154,23 @@ class DepartementController extends Controller
         // Passer la collection fusionnée à la vue
         return view('departements.departements', compact('departements', 'departementsNonEpingler', 'departementsEpingler'));
     }
-    
+    public function updateCheckbox(Request $request)
+    {
+        $id = $request->id;
+        $field = $request->field;
+
+        $Departement = Departement::find($id);
+        if (!$Departement) {
+            return response()->json(['error' => 'Departement not found.']);
+        }
+
+        // Invert the value of the checkbox field
+        $Departement->$field = !$Departement->$field;
+
+        if ($Departement->save()) {
+            return response()->json(['success' => 'Checkbox updated successfully.']);
+        } else {
+            return response()->json(['error' => 'Failed to update checkbox.']);
+        }
+    } 
 }

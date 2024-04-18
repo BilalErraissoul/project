@@ -175,7 +175,7 @@ class AnnonceController extends Controller
         } else {
             return response()->json(['error' => 'Failed to update checkbox.']);
         }
-    }
+    } 
 
     
 }

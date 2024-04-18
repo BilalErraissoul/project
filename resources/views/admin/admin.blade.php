@@ -124,26 +124,7 @@
         </div>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        function updateCheckbox(id, field) {
-            $.ajax({
-                url: '/update-checkbox',
-                method: 'POST',
-                data: {
-                    id: id,
-                    field: field,
-                    _token: '{{ csrf_token() }}'
-                },
-                success: function(response) {
-                    console.log(response);
-                },
-                error: function(xhr) {
-                    console.error(xhr.responseText);
-                }
-            });
-        }
-    </script>
+
         <!-- Other tab panes -->
       </div>
     </div>
@@ -209,7 +190,26 @@
         </div>
     </div>
 </div>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function updateCheckbox(id, field) {
+            $.ajax({
+                url: '/update-checkboxAnonce',
+                method: 'POST',
+                data: {
+                    id: id,
+                    field: field,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(xhr) {
+                    console.error(xhr.responseText);
+                }
+            });
+        }
+    </script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
     ClassicEditor

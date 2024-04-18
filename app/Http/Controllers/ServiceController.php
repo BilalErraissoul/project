@@ -145,4 +145,23 @@ class ServiceController extends Controller
     return view('services.services', compact('services'));
 }
 
+public function updateCheckbox(Request $request)
+{
+    $id = $request->id;
+    $field = $request->field;
+
+    $Service = Service::find($id);
+    if (!$Service) {
+        return response()->json(['error' => 'Service not found.']);
+    }
+
+    // Invert the value of the checkbox field
+    $Service->$field = !$Service->$field;
+
+    if ($Service->save()) {
+        return response()->json(['success' => 'Checkbox updated successfully.']);
+    } else {
+        return response()->json(['error' => 'Failed to update checkbox.']);
+    }
+} 
 }

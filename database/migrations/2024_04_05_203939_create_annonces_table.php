@@ -15,7 +15,10 @@ class CreateAnnoncesTable extends Migration
             $table->date('date_annonce');
             $table->string('image')->nullable(); // Nullable since we're allowing PDF files
             $table->string('pdf')->nullable(); // New column for storing PDF files
-            $table->boolean('épingler');
+            $table->integer('épingler');
+            $table->boolean('special')->default(false);  
+            $table->boolean('carousel')->default(false);  
+            $table->boolean('home')->default(false);  
             $table->timestamps();
         });
     }

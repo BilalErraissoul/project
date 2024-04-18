@@ -92,9 +92,15 @@
                         <td>{{ $article->name }}</td>
                         <td>{!! Str::limit($article->description_article, 100, '...') !!}</td>
                         <td>{{ $article->date_article }}</td>
-                        <td class="text-center"><input type="checkbox" class="form-check-input"></td>
-                        <td class="text-center"><input type="checkbox" class="form-check-input"></td>
-                        <td class="text-center"><input type="checkbox" class="form-check-input"></td>
+                        <td>
+                            <input type="checkbox" class="checkbox" data-item-id="{{ $article->id }}" data-field="special" {{ $article->special ? 'checked' : '' }} onclick="updateCheckbox('{{ $article->id }}', 'special')">
+                           </td>
+                           <td>
+                            <input type="checkbox" class="checkbox" data-item-id="{{ $article->id }}" data-field="carousel" {{ $article->carousel ? 'checked' : '' }} onclick="updateCheckbox('{{ $article->id }}', 'carousel')">
+                            </td>
+                            <td>
+                            <input type="checkbox" class="checkbox" data-item-id="{{ $article->id }}" data-field="home" {{ $article->home ? 'checked' : '' }} onclick="updateCheckbox('{{ $article->id }}', 'home')">
+                            </td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Actions">
                                 <a class="btn btn-info btn-sm" href="{{ route('articles.show',$article->id) }}">Show</a>
@@ -179,6 +185,27 @@
         </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function updateCheckbox(id, field) {
+            $.ajax({
+                url: '/update-checkboxArticle',
+                method: 'POST',
+                data: {
+                    id: id,
+                    field: field,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(xhr) {
+                    console.error(xhr.responseText);
+                }
+            });
+        }
+    </script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     ClassicEditor

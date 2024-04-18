@@ -28,6 +28,10 @@
   Route::get('/admin/events', [AdminController::class, 'events'])->name('admin.events');
   Route::get('/admin/services', [AdminController::class, 'services'])->name('admin.services');
   Route::get('/admin/departements', [AdminController::class, 'departements'])->name('admin.departements');
-  Route::post('/update-checkbox', 'App\Http\Controllers\AnnonceController@updateCheckbox')->name('update.annonces.checkbox');
+  Route::post('/update-checkboxAnonce', [AnnonceController::class,'updateCheckbox'])->name('update.annonces.checkbox');
+  Route::post('/update-checkboxArticle', [ArticleController::class,'updateCheckbox'])->name('update.annonces.checkbox');
+  Route::post('/update-checkboxDepartement', [DepartementController::class,'updateCheckbox'])->name('update.annonces.checkbox');
+  Route::post('/update-checkboxEvent', [EventController::class,'updateCheckbox'])->name('update.annonces.checkbox');
+  Route::post('/update-checkboxService', [ServiceController::class,'updateCheckbox'])->name('update.annonces.checkbox');
 
   

@@ -139,4 +139,24 @@ class EventController extends Controller
         return redirect()->route('events.index')
                         ->with('success', 'Event has been deleted successfully.');
     }
+
+    public function updateCheckbox(Request $request)
+    {
+        $id = $request->id;
+        $field = $request->field;
+
+        $Event = Event::find($id);
+        if (!$Event) {
+            return response()->json(['error' => 'Event not found.']);
+        }
+
+        // Invert the value of the checkbox field
+        $Event->$field = !$Event->$field;
+
+        if ($Event->save()) {
+            return response()->json(['success' => 'Checkbox updated successfully.']);
+        } else {
+            return response()->json(['error' => 'Failed to update checkbox.']);
+        }
+    } 
 }

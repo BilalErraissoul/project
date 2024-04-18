@@ -90,9 +90,15 @@
                         <td>{{ $event->name_event }}</td>
                         <td>{{ Str::words($event->description_event, 10, '...') }}</td>
                         <td>{{ $event->date_event }}</td>
-                        <td class="text-center"><input type="checkbox" class="form-check-input"></td>
-                        <td class="text-center"><input type="checkbox" class="form-check-input"></td>
-                        <td class="text-center"><input type="checkbox" class="form-check-input"></td>
+                        <td>
+                            <input type="checkbox" class="checkbox" data-item-id="{{ $event->id }}" data-field="special" {{ $event->special ? 'checked' : '' }} onclick="updateCheckbox('{{ $event->id }}', 'special')">
+                           </td>
+                           <td>
+                            <input type="checkbox" class="checkbox" data-item-id="{{ $event->id }}" data-field="carousel" {{ $event->carousel ? 'checked' : '' }} onclick="updateCheckbox('{{ $event->id }}', 'carousel')">
+                            </td>
+                            <td>
+                            <input type="checkbox" class="checkbox" data-item-id="{{ $event->id }}" data-field="home" {{ $event->home ? 'checked' : '' }} onclick="updateCheckbox('{{ $event->id }}', 'home')">
+                            </td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Actions">
                                 <a class="btn btn-info btn-sm" href="{{ route('events.show',$event->id) }}">Show</a>
@@ -177,6 +183,27 @@
         </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function updateCheckbox(id, field) {
+            $.ajax({
+                url: '/update-checkboxEvent',
+                method: 'POST',
+                data: {
+                    id: id,
+                    field: field,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(xhr) {
+                    console.error(xhr.responseText);
+                }
+            });
+        }
+    </script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {

@@ -157,4 +157,24 @@ public function articles(Request $request)
     return view('articles.articles', compact('articles', 'articlesNonEpingler', 'articlesEpingler'));
 }
 
+public function updateCheckbox(Request $request)
+    {
+        $id = $request->id;
+        $field = $request->field;
+
+        $Article = Article::find($id);
+        if (!$Article) {
+            return response()->json(['error' => 'Article not found.']);
+        }
+
+        // Invert the value of the checkbox field
+        $Article->$field = !$Article->$field;
+
+        if ($Article->save()) {
+            return response()->json(['success' => 'Checkbox updated successfully.']);
+        } else {
+            return response()->json(['error' => 'Failed to update checkbox.']);
+        }
+    } 
+
 }

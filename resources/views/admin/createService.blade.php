@@ -93,10 +93,16 @@
                         <td>{{ $service->name_service }}</td>
                         <td>{{ Str::words($service->description_service, 10, '...') }}</td>
                         <td>{{ $service->date_service }}</td>
-                        <td class="text-center"><input type="checkbox" class="form-check-input"></td>
-                        <td class="text-center"><input type="checkbox" class="form-check-input"></td>
-                        <td class="text-center"><input type="checkbox" class="form-check-input"></td>
                         <td>
+                            <input type="checkbox" class="checkbox" data-item-id="{{ $service->id }}" data-field="special" {{ $service->special ? 'checked' : '' }} onclick="updateCheckbox('{{ $service->id }}', 'special')">
+                           </td>
+                           <td>
+                            <input type="checkbox" class="checkbox" data-item-id="{{ $service->id }}" data-field="carousel" {{ $service->carousel ? 'checked' : '' }} onclick="updateCheckbox('{{ $service->id }}', 'carousel')">
+                            </td>
+                            <td>
+                            <input type="checkbox" class="checkbox" data-item-id="{{ $service->id }}" data-field="home" {{ $service->home ? 'checked' : '' }} onclick="updateCheckbox('{{ $service->id }}', 'home')">
+                            </td>
+                         <td>
                             <div class="btn-group" role="group" aria-label="Actions">
                                 <a class="btn btn-info btn-sm" href="{{ route('services.show',$service->id) }}">Show</a>
                                 <a class="btn btn-primary btn-sm" href="{{ route('services.edit',$service->id) }}">Edit</a>
@@ -180,6 +186,27 @@
         </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function updateCheckbox(id, field) {
+            $.ajax({
+                url: '/update-checkboxService',
+                method: 'POST',
+                data: {
+                    id: id,
+                    field: field,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(xhr) {
+                    console.error(xhr.responseText);
+                }
+            });
+        }
+    </script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
