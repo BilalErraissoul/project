@@ -308,78 +308,10 @@
         </div>
     </div> 
 </div> 
-<div class="container-fluid bg-gradient py-5">
-    <div class="row justify-content-between">
-        <div class="col-lg-6">
-            <div class="mb-4">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h2 class="text-primary mb-3">ARTICLES</h2>
-                    <a href="{{ route('articles') }}" class="btn btn-primary btn-sm">Lire tous les articles</a>
-                </div>
-                <!-- Articles Section -->
-                <div class="row">
-                    @foreach ($articles as $article)
-                        @if ($loop->index < 2)
-                            <div class="col-md-6 mb-4">
-                                <div class="card border-0 shadow">
-                                    <img src="/images/{{ $article->image }}" class="card-img-top" alt="{{ $article->name }}" style="max-height: 200px; object-fit: cover;">
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ $article->name }}</h5>
-                                        <p class="card-text">{!! Str::words($article->description_article, 20, '...') !!}</p>
-                                        <a href="{{ route('articles.show',['article'=>$article->id]) }}" class="btn btn-primary btn-sm">Lire la suite</a>
-                                    </div>
-                                    <div class="card-footer bg-transparent">
-                                        <small class="text-muted">{{ \Carbon\Carbon::parse($article->created_at)->format('D M d Y H:i') }}</small>
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
-                    @endforeach
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="mb-4">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h2 class="text-danger mb-3">ANNONCES</h2>
-                    <a href="{{ route('annonces') }}" class="btn btn-danger btn-sm">Lire tous les annonces</a>
-                </div>
-                <!-- Announcements Section -->
-                <div class="row">
-                    @foreach ($annoncesHome as $annonce)
-                        @if ($loop->index < 2)
-                            <div class="col-md-6 mb-4">
-                                <div class="card border-0 shadow">
-                                    <img src="/images/{{ $annonce->image }}" class="card-img-top" alt="{{ $annonce->name_annonce }}" style="max-height: 200px; object-fit: cover;">
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ $annonce->name_annonce }}</h5>
-                                        <p class="card-text">{!! Str::words($annonce->description_annonce, 20, '...') !!}</p>
-                                        <a href="{{ route('annonces.show',['annonce'=>$annonce->id]) }}" class="btn btn-danger btn-sm">Lire la suite</a>
-                                    </div>
-                                    <div class="card-footer bg-transparent">
-                                        <small class="text-muted">{{ \Carbon\Carbon::parse($annonce->created_at)->format('D M d Y H:i') }}</small>
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 <!-- Include the Font Awesome stylesheet -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-
-       
-      
-
-        
-   
-    
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>

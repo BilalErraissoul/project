@@ -91,7 +91,7 @@
                     <tr>
                         <td>{{ $service->id }}</td>
                         <td>{{ $service->name_service }}</td>
-                        <td>{{ Str::words($service->description_service, 10, '...') }}</td>
+                        <td>{!! Str::words($service->description_service, 10, '...') !!}</td>
                         <td>{{ $service->date_service }}</td>
                         <td>
                             <input type="checkbox" class="checkbox" data-item-id="{{ $service->id }}" data-field="special" {{ $service->special ? 'checked' : '' }} onclick="updateCheckbox('{{ $service->id }}', 'special')">

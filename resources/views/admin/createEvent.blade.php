@@ -88,7 +88,7 @@
                     <tr>
                         <td>{{ $event->id }}</td>
                         <td>{{ $event->name_event }}</td>
-                        <td>{{ Str::words($event->description_event, 10, '...') }}</td>
+                        <td>{!! Str::words($event->description_event, 10, '...') !!}</td>
                         <td>{{ $event->date_event }}</td>
                         <td>
                             <input type="checkbox" class="checkbox" data-item-id="{{ $event->id }}" data-field="special" {{ $event->special ? 'checked' : '' }} onclick="updateCheckbox('{{ $event->id }}', 'special')">

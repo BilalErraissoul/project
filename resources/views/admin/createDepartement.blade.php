@@ -89,7 +89,7 @@
                     <tr>
                         <td>{{ $departement->id }}</td>
                         <td>{{ $departement->name_departement }}</td>
-                        <td>{{ Str::words($departement->description_departement, 10, '...') }}</td>
+                        <td>{!! Str::words($departement->description_departement, 10, '...') !!}</td>
                         <td>{{ $departement->date_departement }}</td>
                         <td>
                             <input type="checkbox" class="checkbox" data-item-id="{{ $departement->id }}" data-field="special" {{ $departement->special ? 'checked' : '' }} onclick="updateCheckbox('{{ $departement->id }}', 'special')">

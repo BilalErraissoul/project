@@ -15,6 +15,8 @@
   Route::get('/annonces/listeAnnonces', [AnnonceController::class, 'annonces'])->name('annonces');
   Route::get('/departements/listeDepartements', [DepartementController::class, 'departements'])->name('departements');
   Route::get('/services/listeServices', [ServiceController::class, 'services'])->name('services');
+  Route::get('/events/listeEvents', [EventController::class, 'events'])->name('events');
+
 
 
   Route::resource('annonces', AnnonceController::class);
