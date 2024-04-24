@@ -128,11 +128,11 @@
                         <!-- Slides de votre carousel -->
                         @foreach ($services as $service)
                         <div class="swiper-slide">
-                            <img src="/images/{{ $service->image }}" class="d-block w-100" alt="{{ $service->name_service }}">
+                            <img src="/images/{{ $service->image }}" class="d-block w-100" alt="{{ $service->name }}">
                             <div class="carousel-caption text-dark">
                                 <div class="annonce-info">
-                                    <h5>{{ $service->name_service }}</h5>
-                                    <p>{!! Str::words($service->description_service, 15, '...') !!}</p>
+                                    <h5>{{ $service->name}}</h5>
+                                    <p>{!! Str::words($service->description, 15, '...') !!}</p>
                                 </div>
                             </div>
                         </div>
@@ -152,24 +152,47 @@
     <div class="row justify-content-between">
     <div class="col-lg-9">  
         <h1 class="mb-4" style="color: #003366; font-size: 36px; font-weight: bold;">LISTE DES SERVICES</h1>
-        @foreach ($services as $service)
+        @foreach ($servicesEpingler as $services)
+    <div class="article mb-4 p-3" style="background-color: #f8f9fa; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <div class="progress mb-2" style="height: 2px;">
+            <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <div class="row align-items-center">
+            <div class="col-md-4">
+                <div class="position-relative overflow-hidden">
+                    <div class="position-absolute top-0 start-0 p-2 bg-danger rounded-circle" style="font-size: 20px;">
+                        <i class="fas fa-bell text-white"></i>
+                    </div>
+                    <img src="/images/{{ $services->image }}" class="img-fluid rounded" alt="{{ $services->name }}" style="object-fit: cover; object-position: center; width: 100%;">
+                </div>
+            </div>
+            <div class="col-md-8">
+                <h5 class="fw-bold text-dark" style="font-size: 20px;">{{ $services->name }}</h5>
+                <div class="article-description" style="height: 72px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; font-size: 16px;">
+                    <p class="text-muted">{!! $services->description !!}</p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="{{ route('services.show',['service'=>$services->id]) }}}}" class="text-primary" style="font-size: 18px;">Lire la suite</a>
+                    <p class="text-muted m-0" style="font-size: 18px;">{{ \Carbon\Carbon::parse($services->created_at)->format('D M d Y H:i') }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endforeach
+        @foreach ($servicesNonEpingler as $service) 
         <div class="article mb-4 p-3" style="background-color: #f8f9fa; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
             <div class="progress mb-2" style="height: 2px;">
                 <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <div class="row align-items-center">
-                <div class="col-md-4">
-                    <div class="position-relative overflow-hidden">
-                        <div class="position-absolute top-0 start-0 p-2 bg-danger rounded-circle" style="font-size: 20px;">
-                            <i class="fas fa-bell text-white"></i>
-                        </div>
-                        <img src="/images/{{ $service->image }}" class="img-fluid rounded" alt="{{ $service->name_service }}" style="object-fit: cover; object-position: center; width: 100%;">
-                    </div>
+                <div class="col-md-12"> 
+                        <img src="/images/{{ $service->image }}" class="img-fluid rounded" alt="{{ $service->name}}" style="object-fit: cover; object-position: center; width: 100%;">
+                    
                 </div>
                 <div class="col-md-8">
-                    <h5 class="fw-bold text-dark" style="font-size: 20px;">{{ $service->name_service }}</h5>
+                    <h5 class="fw-bold text-dark" style="font-size: 20px;">{{ $service->name }}</h5>
                     <div class="article-description" style="height: 72px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; font-size: 16px;">
-                        <p class="text-muted">{!! $service->description_service !!}</p>
+                        <p class="text-muted">{!! $service->description !!}</p>
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
                         <a href="{{ route('services.show',['service'=>$service->id]) }}" class="text-primary" style="font-size: 18px;">Lire la suite</a>
@@ -177,7 +200,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> 
         @endforeach
     </div>
 

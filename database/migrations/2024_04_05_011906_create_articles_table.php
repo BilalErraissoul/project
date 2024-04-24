@@ -11,10 +11,9 @@ class CreateArticlesTable extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('description_article');
-            $table->date('date_article');
-            $table->string('image');
-            $table->integer('épingler');
+            $table->text('description');
+            $table->date('date');
+            $table->string('image'); 
             $table->boolean('special')->default(false);  
             $table->boolean('carousel')->default(false);  
             $table->boolean('home')->default(false); 

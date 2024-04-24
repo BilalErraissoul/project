@@ -145,13 +145,13 @@
                 <div class="swiper mySwiper">
                     <div class="swiper-wrapper">
                         
-                        @foreach ($events as $event)
+                        @foreach ($Events as $event)
                         <div class="swiper-slide">
-                            <img src="/images/{{ $event->image }}" class="d-block w-100" alt="{{ $event->name_event }}">
+                            <img src="/images/{{ $event->image }}" class="d-block w-100" alt="{{ $event->name  }}">
                             <div class="carousel-caption text-dark">
                                 <div class="annonce-info">
-                                    <h5>{{ $event->name_event }}</h5>
-                                    <p>{!! Str::words($event->description_event, 15, '...') !!}</p>
+                                    <h5>{{ $event->name }}</h5>
+                                    <p>{!! Str::words($event->description , 15, '...') !!}</p>
                                 </div>
                             </div>
                         </div>
@@ -183,15 +183,15 @@
                     </div>
                     <div class="row align-items-center">
                         <div class="col-md-5 position-relative overflow-hidden">
-                            <img src="/images/{{ $event->image }}" class="img-fluid rounded" alt="{{ $event->name_event }}">
+                            <img src="/images/{{ $event->image }}" class="img-fluid rounded" alt="{{ $event->name }}">
                             <div class="position-absolute top-0 start-3 p-2 bg-danger rounded-circle">
                                 <i class="fas fa-bell text-white"></i>
                             </div>
                         </div>
                         <div class="col-md-7">
-                            <h5>{{ $event->name_event }}</h5>
+                            <h5>{{ $event->name  }}</h5>
                             <div class="description-container" style="max-height: 5em; overflow: hidden; position: relative;">
-                                <p class="description-text" style="margin: 0;">{!! $event->description_event !!}</p>
+                                <p class="description-text" style="margin: 0;">{!! $event->description  !!}</p>
                                 <span class="more-indicator" style="position: absolute; bottom: 0; right: 0;">...</span>
                             </div>
                             <div class="d-flex justify-content-between align-items-center" style="margin-top: 10px;">
@@ -203,19 +203,19 @@
                 </div>
             @endforeach
 
-            @foreach ($events as $event)
+            @foreach ($eventsNonEpingler as $event)
                 <div class="event-item mb-4 p-3" style="background-color: #f8f9fa; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
                     <div class="progress mb-2" style="height: 2px;">
                         <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <div class="row align-items-center">
                         <div class="col-md-5">
-                            <img src="/images/{{ $event->image }}" class="img-fluid rounded" alt="{{ $event->name_event }}">
+                            <img src="/images/{{ $event->image }}" class="img-fluid rounded" alt="{{ $event->name }}">
                         </div>
                         <div class="col-md-7">
-                            <h5>{{ $event->name_event }}</h5>
+                            <h5>{{ $event->name }}</h5>
                             <div class="description-container" style="max-height: 5em; overflow: hidden; position: relative;">
-                                <p class="description-text" style="margin: 0;">{!! $event->description_event !!}</p>
+                                <p class="description-text" style="margin: 0;">{!! $event->description  !!}</p>
                                 <span class="more-indicator" style="position: absolute; bottom: 0; right: 0;">...</span>
                             </div>
                             <div class="d-flex justify-content-between align-items-center" style="margin-top: 10px;">

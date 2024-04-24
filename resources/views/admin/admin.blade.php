@@ -94,9 +94,9 @@
                     @foreach ($annonces as $annonce)
                     <tr>
                         <td>{{ $annonce->id }}</td>
-                        <td>{{ $annonce->name_annonce }}</td>
-                        <td>{!! Str::limit($annonce->description_annonce, 100, '...') !!}</td>
-                        <td>{{ $annonce->date_annonce }}</td>
+                        <td>{{ $annonce->name  }}</td>
+                        <td>{!! Str::limit($annonce->description , 100, '...') !!}</td>
+                        <td>{{ $annonce->date }}</td>
                         <td>
                          <input type="checkbox" class="checkbox" data-item-id="{{ $annonce->id }}" data-field="special" {{ $annonce->special ? 'checked' : '' }} onclick="updateCheckbox('{{ $annonce->id }}', 'special')">
                         </td>
@@ -152,7 +152,7 @@
 
                     <div class="mb-3">
                         <label for="name" class="form-label">Name:</label>
-                        <input type="text" name="name_annonce" class="form-control" id="name_annonce" placeholder="Enter name" >
+                        <input type="text" name="name" class="form-control" id="name_annonce" placeholder="Enter name" >
                         @error('name_annonce')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -160,13 +160,13 @@
 
                     <div class="mb-3">
                         <label for="description" class="form-label">Description:</label>
-                        <textarea class="form-control" name="description_annonce" rows="5" placeholder="Enter description" id="description_annonce" ></textarea>
+                        <textarea class="form-control" name="description" rows="5" placeholder="Enter description" id="description_annonce" ></textarea>
                         <div class="invalid-feedback">Please enter a description.</div>
                     </div>
 
                     <div class="mb-3">
                         <label for="date" class="form-label">Date:</label>
-                        <input type="date" name="date_annonce" class="form-control" id="date_annonce" >
+                        <input type="date" name="date" class="form-control" id="date_annonce" >
                         <div class="invalid-feedback">Please select a date.</div>
                     </div>
 

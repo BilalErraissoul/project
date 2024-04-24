@@ -90,8 +90,8 @@
                     <tr>
                         <td>{{ $article->id }}</td>
                         <td>{{ $article->name }}</td>
-                        <td>{!! Str::limit($article->description_article, 100, '...') !!}</td>
-                        <td>{{ $article->date_article }}</td>
+                        <td>{!! Str::limit($article->description , 100, '...') !!}</td>
+                        <td>{{ $article->date  }}</td>
                         <td>
                             <input type="checkbox" class="checkbox" data-item-id="{{ $article->id }}" data-field="special" {{ $article->special ? 'checked' : '' }} onclick="updateCheckbox('{{ $article->id }}', 'special')">
                            </td>
@@ -155,13 +155,13 @@
 
                     <div class="mb-3">
                         <label for="description" class="form-label">Description:</label>
-                        <textarea class="form-control" name="description_article" rows="5" placeholder="Enter description" id="description_article" ></textarea>
+                        <textarea class="form-control" name="description" rows="5" placeholder="Enter description" id="description_article" ></textarea>
                         <div class="invalid-feedback">Please enter a description.</div>
                     </div>
 
                     <div class="mb-3">
                         <label for="date" class="form-label">Date:</label>
-                        <input type="date" name="date_article" class="form-control" id="date_article" >
+                        <input type="date" name="date" class="form-control" id="date_article" >
                         <div class="invalid-feedback">Please select a date.</div>
                     </div>
 

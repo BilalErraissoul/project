@@ -10,6 +10,6 @@ class Departement extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name_departement', 'description_departement', 'date_departement', 'image', 'épingler'
+        'name', 'description', 'date', 'image', 'special'
     ];
 }

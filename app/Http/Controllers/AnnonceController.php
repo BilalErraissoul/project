@@ -43,9 +43,9 @@ class AnnonceController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name_annonce' => 'required',
-            'description_annonce' => 'required',
-            'date_annonce' => 'required|date',
+            'name' => 'required',
+            'description' => 'required',
+            'date' => 'required|date',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg,pdf|max:2048', // Updated to accept PDF files
             'pdf' => 'nullable|mimes:pdf|max:2048', // New validation rule for PDF files
         ]);
@@ -69,7 +69,7 @@ class AnnonceController extends Controller
             $isépingler=false;
         }
       
-        $input['épingler'] = $isépingler;
+        $input['special'] = $isépingler;
         Annonce::create($input);
        
         return redirect()->route('annonces.index')
@@ -146,13 +146,13 @@ class AnnonceController extends Controller
     public function annonces(Request $request)
     {
         // Récupérer les annonces épinglées
-        $annoncesEpingler = Annonce::where('épingler', 1)->orderBy('created_at', 'desc')->get();
+        $annoncesEpingler = Annonce::where('special', 1)->orderBy('created_at', 'desc')->get();
         
         // Récupérer les autres annonces
-        $annoncesNonEpingler = Annonce::where('épingler', 0)->orderBy('created_at', 'desc')->get();
+        $annoncesNonEpingler = Annonce::where('special', 0)->orderBy('created_at', 'desc')->get();
         
         // Fusionner les collections
-        $annonces = $annoncesEpingler->merge($annoncesNonEpingler);
+        $annonces = Annonce::where('carousel', 1)->get();
         
         // Passer la collection fusionnée à la vue
         return view('annonces.annonces', compact('annonces', 'annoncesNonEpingler', 'annoncesEpingler'));

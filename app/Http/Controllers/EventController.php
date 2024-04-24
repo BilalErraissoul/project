@@ -43,10 +43,10 @@ class EventController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name_event' => 'required',
-            'description_event' => 'required',
+            'name' => 'required',
+            'description' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'date_event' => 'required|date',
+            'date' => 'required|date',
         ]);
     
         $input = $request->all(); 
@@ -65,7 +65,7 @@ class EventController extends Controller
             $isépingler=0;
         }
       
-        $input['épingler'] = $isépingler;
+        $input['special'] = $isépingler;
         Event::create($input);
        
         return redirect()->route('events.index')
@@ -139,7 +139,18 @@ class EventController extends Controller
         return redirect()->route('events.index')
                         ->with('success', 'Event has been deleted successfully.');
     }
-
+    public function events(Request $request)
+    
+{
+    $eventsEpingler = Event::where('special', 1)->orderBy('created_at', 'desc')->get();
+        
+        // Récupérer les autres annonces
+        $eventsNonEpingler = Event::where('special', 0)->orderBy('created_at', 'desc')->get();
+        
+        // Fusionner les collections
+        $Events = Event::where('carousel', 1)->get(); 
+    return view('events.events', compact('Events','eventsEpingler','eventsNonEpingler'));
+}
     public function updateCheckbox(Request $request)
     {
         $id = $request->id;

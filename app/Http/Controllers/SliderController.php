@@ -20,72 +20,52 @@ class SliderController extends Controller
     {
         // Get sliders
         $sliders = Slider::get();
-        
-        // Get pinned events
-        $eventsEpingler = Event::where('épingler', 1)->get();
-        
-        // Get non-pinned events
-        $events = Event::where('épingler', 0)->latest()->paginate(5);
+         
+         
         
         // Get events marked for home page
-        $eventsHome = Event::where('home', 1)->get();
+        // $eventsHome = Event::where('home', 1)->get();
         
-        // Get events marked as special
-        $eventsSpecial = Event::where('special', 1)->get();
+        $eventsHome = Event::where('home', 1)->orderBy('special', 'desc')->get();
         
         // Get all events
         $eventsCursor = Event::where('carousel', 1)->get();
-        
-        // Get pinned articles
-        $articlesEpingler = Article::where('épingler', 1)->get();
+         
         
         // Get non-pinned articles
         $articles = Article::where('home', 1)->get();
         
         // Get articles marked for home page
-        $articlesHome = Article::where('home', 1)->get();
+        $articlesHome = Article::where('home', 1)->orderBy('special', 'desc')->get();
         
         // Get articles marked as special
         $articlesSpecial = Article::where('special', 1)->get();
         
         // Get all articles
         $articlesCursor = Article::where('carousel', 1)->get();
-        
-        // Get pinned announcements
-        $annoncesEpingler = Annonce::where('épingler', 1)->get();
+         
         
         // Get announcements for home page
-        $annoncesHome = Annonce::where('home', 1)->get();
+        $annoncesHome = Annonce::where('home', 1)->orderBy('special', 'desc')->get();
         
         // Get announcements marked as special
         $annoncesSpecial = Annonce::where('special', 1)->get();
         
         // Get all announcements
         $annoncesCursor = Annonce::where('carousel', 1)->get();
-        
-        // Get pinned departments
-        $departementsEpingler = Departement::where('épingler', 1)->get();
-        
-        // Get non-pinned departments
-        $departements = Departement::where('épingler', 0)->latest()->paginate(5);
+         
         
         // Get departments marked for home page
-        $departementsHome = Departement::where('home', 1)->get();
-        
+        $departementsHome = Departement::where('home', 1)->orderBy('special', 'desc')->get();
         // Get departments marked as special
         $departementsSpecial = Departement::where('special', 1)->get();
         
         // Get all departments
         $departementsCursor = Departement::where('carousel', 1)->get();
-        
-        // Get pinned services
-        $servicesEpingler = Service::where('épingler', 1)->get();
-        
-        // Get non-pinned services
-        $services = Service::where('épingler', 0)->latest()->paginate(5);
+         
         
         // Get services marked for home page
-        $servicesHome = Service::where('home', 1)->get();
+        $servicesHome = Service::where('home', 1)->orderBy('special', 'desc')->get();
         
         // Get services marked as special
         $servicesSpecial = Service::where('special', 1)->get();
@@ -99,33 +79,25 @@ class SliderController extends Controller
             $articlesCursor->toArray(),
             $servicesCursor->toArray()
         );
-        
         // Shuffle the merged array to randomize the order
         shuffle($carouselhome);
+        
+        // dd($carouselhome);
         // Pass data to the view
         return view('sliders', compact(
-            'sliders',
-            'eventsEpingler',
-            'events',
-            'eventsHome',
-            'eventsSpecial',
-            'eventsCursor',
-            'articlesEpingler',
+            'sliders',  
+            'eventsHome', 
+            'eventsCursor', 
             'articles',
             'articlesHome',
             'articlesSpecial',
-            'articlesCursor',
-            'annoncesEpingler',
+            'articlesCursor', 
             'annoncesHome',
             'annoncesSpecial',
-            'annoncesCursor',
-            'departementsEpingler',
-            'departements',
+            'annoncesCursor', 
             'departementsHome',
             'departementsSpecial',
-            'departementsCursor',
-            'servicesEpingler',
-            'services',
+            'departementsCursor',  
             'servicesHome',
             'servicesSpecial',
             'servicesCursor',

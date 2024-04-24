@@ -10,12 +10,11 @@ class CreateAnnoncesTable extends Migration
     {
         Schema::create('annonces', function (Blueprint $table) {
             $table->id();
-            $table->string('name_annonce');
-            $table->text('description_annonce');
-            $table->date('date_annonce');
+            $table->string('name');
+            $table->text('description');
+            $table->date('date');
             $table->string('image')->nullable(); // Nullable since we're allowing PDF files
-            $table->string('pdf')->nullable(); // New column for storing PDF files
-            $table->integer('épingler');
+            $table->string('pdf')->nullable(); // New column for storing PDF files 
             $table->boolean('special')->default(false);  
             $table->boolean('carousel')->default(false);  
             $table->boolean('home')->default(false);  

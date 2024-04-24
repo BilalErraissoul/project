@@ -10,12 +10,12 @@
   use App\Http\Controllers\ServiceController;
   use App\Http\Controllers\DepartementController;
   
+  Route::get('/events/listeEvents', [EventController::class, 'events'])->name('events');
   Route::resource('events', EventController::class);
   Route::get('/articles/listeArticles', [ArticleController::class, 'articles'])->name('articles');
   Route::get('/annonces/listeAnnonces', [AnnonceController::class, 'annonces'])->name('annonces');
   Route::get('/departements/listeDepartements', [DepartementController::class, 'departements'])->name('departements');
   Route::get('/services/listeServices', [ServiceController::class, 'services'])->name('services');
-  Route::get('/events/listeEvents', [EventController::class, 'events'])->name('events');
 
 
 

@@ -145,13 +145,14 @@
                 <div class="swiper mySwiper">
                     <div class="swiper-wrapper">
                         
-                        @foreach ($events as $event)
+                        @foreach ($carouselhome  as $carouse)
+                        
                         <div class="swiper-slide">
-                            <img src="/images/{{ $event->image }}" class="d-block w-100" alt="{{ $event->name_event }}">
+                            <img src="/images/{{ $carouse['image'] }}" class="d-block w-100" alt="{{ $carouse["name"] }}">
                             <div class="carousel-caption text-dark">
                                 <div class="annonce-info">
-                                    <h5>{{ $event->name_event }}</h5>
-                                    <p>{!! Str::words($event->description_event, 15, '...') !!}</p>
+                                    <h5>{{ $carouse["name"] }}</h5>
+                                    <p>{!! Str::words($carouse["description"], 15, '...') !!}</p>
                                 </div>
                             </div>
                         </div>
@@ -176,22 +177,23 @@
         <div class="col-lg-9">  
             <h1 class="mb-4" style="color: #003366; font-size: 36px; font-weight: bold;">LISTE DES EVENEMENTS</h1>
             <!-- Events Section -->
-            @foreach ($eventsEpingler as $event)
+            @foreach ($eventsHome as $event)
+            @if ($event->special == 1) 
                 <div class="event-item mb-4 p-3" style="background-color: #f8f9fa; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
                     <div class="progress mb-2" style="height: 2px;">
                         <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <div class="row align-items-center">
                         <div class="col-md-5 position-relative overflow-hidden">
-                            <img src="/images/{{ $event->image }}" class="img-fluid rounded" alt="{{ $event->name_event }}">
+                            <img src="/images/{{ $event->image }}" class="img-fluid rounded" alt="{{ $event->name}}">
                             <div class="position-absolute top-0 start-3 p-2 bg-danger rounded-circle">
                                 <i class="fas fa-bell text-white"></i>
                             </div>
                         </div>
                         <div class="col-md-7">
-                            <h5>{{ $event->name_event }}</h5>
+                            <h5>{{ $event->name }}</h5>
                             <div class="description-container" style="max-height: 5em; overflow: hidden; position: relative;">
-                                <p class="description-text" style="margin: 0;">{!! $event->description_event !!}</p>
+                                <p class="description-text" style="margin: 0;">{!! $event->description  !!}</p>
                                 <span class="more-indicator" style="position: absolute; bottom: 0; right: 0;">...</span>
                             </div>
                             <div class="d-flex justify-content-between align-items-center" style="margin-top: 10px;">
@@ -201,21 +203,19 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
-
-            @foreach ($events as $event)
+                @else
                 <div class="event-item mb-4 p-3" style="background-color: #f8f9fa; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
                     <div class="progress mb-2" style="height: 2px;">
                         <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <div class="row align-items-center">
                         <div class="col-md-5">
-                            <img src="/images/{{ $event->image }}" class="img-fluid rounded" alt="{{ $event->name_event }}">
+                            <img src="/images/{{ $event->image }}" class="img-fluid rounded" alt="{{ $event->name }}">
                         </div>
                         <div class="col-md-7">
                             <h5>{{ $event->name_event }}</h5>
                             <div class="description-container" style="max-height: 5em; overflow: hidden; position: relative;">
-                                <p class="description-text" style="margin: 0;">{!! $event->description_event !!}</p>
+                                <p class="description-text" style="margin: 0;">{!! $event->description  !!}</p>
                                 <span class="more-indicator" style="position: absolute; bottom: 0; right: 0;">...</span>
                             </div>
                             <div class="d-flex justify-content-between align-items-center" style="margin-top: 10px;">
@@ -225,10 +225,9 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
-          
-        </div>
-        
+                @endif
+            @endforeach  
+        </div> 
         <div class="col-lg-3">
             <div class="quick-access">
                 <h2>Accès Rapide</h2>
@@ -318,14 +317,35 @@
                 </div>
                 <!-- Articles Section -->
                 <div class="row">
-                    @foreach ($articles as $article)
+                    @foreach ($articlesHome as $article)
+                    @if ($article->special == 1) 
+                    <div class="col-md-6 mb-4">
+                        
+                        <div class="card border-0 shadow ">
+                            <div class="col-12 position-relative overflow-hidden w-100 h-100"> 
+                                <img src="/images/{{ $article->image }}" class="card-img-top " style="width: 200px ;height: 140px" alt="{{ $article->name }}" style="max-height: 200px; object-fit: cover;">
+                                <div class="position-absolute top-0 start-3 p-2 bg-danger rounded-circle">
+                                    <i class="fas fa-bell text-white"></i>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $article->name }}</h5>
+                                <p class="card-text">{!! Str::words($article->description , 20, '...') !!}</p>
+                                <a href="{{ route('articles.show',['article'=>$article->id]) }}" class="btn btn-primary btn-sm">Lire la suite</a>
+                            </div>
+                            <div class="card-footer bg-transparent">
+                                <small class="text-muted">{{ \Carbon\Carbon::parse($article->created_at)->format('D M d Y H:i') }}</small>
+                            </div>
+                        </div>
+                    </div>
+                    @else
                         @if ($loop->index < 2)
                             <div class="col-md-6 mb-4">
                                 <div class="card border-0 shadow">
                                     <img src="/images/{{ $article->image }}" class="card-img-top" alt="{{ $article->name }}" style="max-height: 200px; object-fit: cover;">
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $article->name }}</h5>
-                                        <p class="card-text">{!! Str::words($article->description_article, 20, '...') !!}</p>
+                                        <p class="card-text">{!! Str::words($article->description , 20, '...') !!}</p>
                                         <a href="{{ route('articles.show',['article'=>$article->id]) }}" class="btn btn-primary btn-sm">Lire la suite</a>
                                     </div>
                                     <div class="card-footer bg-transparent">
@@ -333,6 +353,7 @@
                                     </div>
                                 </div>
                             </div>
+                        @endif
                         @endif
                     @endforeach
                 </div>
@@ -347,6 +368,27 @@
                 <!-- Announcements Section -->
                 <div class="row">
                     @foreach ($annoncesHome as $annonce)
+                    @if ($annonce->special == 1) 
+                    <div class="col-md-6 mb-4">
+                        
+                        <div class="card border-0 shadow ">
+                            <div class="col-12 position-relative overflow-hidden w-100 h-100"> 
+                                <img src="/images/{{ $annonce->image }}" class="card-img-top " style="width: 200px ;height: 140px" alt="{{ $annonce->name }}" style="max-height: 200px; object-fit: cover;">
+                                <div class="position-absolute top-0 start-3 p-2 bg-danger rounded-circle">
+                                    <i class="fas fa-bell text-white"></i>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $annonce->name }}</h5>
+                                <p class="card-text">{!! Str::words($annonce->description_article, 20, '...') !!}</p>
+                                <a href="{{  route('annonces.show',['annonce'=>$annonce->id]) }}" class="btn btn-primary btn-sm">Lire la suite</a>
+                            </div>
+                            <div class="card-footer bg-transparent">
+                                <small class="text-muted">{{ \Carbon\Carbon::parse($annonce->created_at)->format('D M d Y H:i') }}</small>
+                            </div>
+                        </div>
+                    </div>
+                    @else
                         @if ($loop->index < 2)
                             <div class="col-md-6 mb-4">
                                 <div class="card border-0 shadow">
@@ -361,6 +403,7 @@
                                     </div>
                                 </div>
                             </div>
+                        @endif
                         @endif
                     @endforeach
                 </div>

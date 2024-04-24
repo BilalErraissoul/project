@@ -43,10 +43,10 @@ class ServiceController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name_service' => 'required',
-            'description_service' => 'required',
+            'name' => 'required',
+            'description' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'date_service' => 'required|date',
+            'date' => 'required|date',
         ]);
     
         $input = $request->all(); 
@@ -65,7 +65,7 @@ class ServiceController extends Controller
             $isépingler=0;
         }
       
-        $input['épingler'] = $isépingler;
+        $input['special'] = $isépingler;
         Service::create($input);
        
         return redirect()->route('services.index')
@@ -140,9 +140,16 @@ class ServiceController extends Controller
                         ->with('success', 'Service has been deleted successfully.');
     }
     public function services(Request $request)
+    
 {
-    $services = Service::all();
-    return view('services.services', compact('services'));
+    $servicesEpingler = Service::where('special', 1)->orderBy('created_at', 'desc')->get();
+        
+        // Récupérer les autres annonces
+        $servicesNonEpingler = Service::where('special', 0)->orderBy('created_at', 'desc')->get();
+        
+        // Fusionner les collections
+        $services = Service::where('carousel', 1)->get(); 
+    return view('services.services', compact('services','servicesEpingler','servicesNonEpingler'));
 }
 
 public function updateCheckbox(Request $request)

@@ -10,6 +10,6 @@ class Annonce extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name_annonce', 'description_annonce', 'date_annonce', 'image', 'épingler'
+        'name', 'description', 'date', 'image', 'special'
     ];
 }

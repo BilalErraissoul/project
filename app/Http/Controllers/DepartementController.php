@@ -42,11 +42,12 @@ class DepartementController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        // dd($request->all());
         $request->validate([
-            'name_departement' => 'required',
-            'description_departement' => 'required',
+            'name' => 'required',
+            'description' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'date_departement' => 'required|date',
+            'date' => 'required|date',
         ]);
     
         $input = $request->all(); 
@@ -65,7 +66,7 @@ class DepartementController extends Controller
             $isépingler=0;
         }
       
-        $input['épingler'] = $isépingler;
+        $input['special'] = $isépingler;
         Departement::create($input);
        
         return redirect()->route('departements.index')
@@ -143,13 +144,13 @@ class DepartementController extends Controller
     public function departements(Request $request)
     {
         // Récupérer les départements épinglés
-        $departementsEpingler = Departement::where('épingler', 1)->orderBy('created_at', 'desc')->get();
+        $departementsEpingler = Departement::where('special', 1)->orderBy('created_at', 'desc')->get();
         
         // Récupérer les autres départements
-        $departementsNonEpingler = Departement::where('épingler', 0)->orderBy('created_at', 'desc')->get();
+        $departementsNonEpingler = Departement::where('special', 0)->orderBy('created_at', 'desc')->get();
         
         // Fusionner les collections
-        $departements = $departementsEpingler->merge($departementsNonEpingler);
+        $departements = Departement::where('carousel', 1)->get();
         
         // Passer la collection fusionnée à la vue
         return view('departements.departements', compact('departements', 'departementsNonEpingler', 'departementsEpingler'));

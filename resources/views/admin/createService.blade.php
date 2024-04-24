@@ -90,9 +90,9 @@
                     @foreach ($services as $service)
                     <tr>
                         <td>{{ $service->id }}</td>
-                        <td>{{ $service->name_service }}</td>
-                        <td>{!! Str::words($service->description_service, 10, '...') !!}</td>
-                        <td>{{ $service->date_service }}</td>
+                        <td>{{ $service->name }}</td>
+                        <td>{!! Str::words($service->description , 10, '...') !!}</td>
+                        <td>{{ $service->date }}</td>
                         <td>
                             <input type="checkbox" class="checkbox" data-item-id="{{ $service->id }}" data-field="special" {{ $service->special ? 'checked' : '' }} onclick="updateCheckbox('{{ $service->id }}', 'special')">
                            </td>
@@ -148,21 +148,21 @@
 
                     <div class="mb-3">
                         <label for="name" class="form-label">Name:</label>
-                        <input type="text" name="name_service" class="form-control" id="name_service" placeholder="Enter name" >
-                        @error('name_service')
+                        <input type="text" name="name" class="form-control" id="name_service" placeholder="Enter name" >
+                        @error('name')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
 
                     <div class="mb-3">
                         <label for="description" class="form-label">Description:</label>
-                        <textarea class="form-control" name="description_service" rows="5" placeholder="Enter description" id="description_service" ></textarea>
+                        <textarea class="form-control" name="description" rows="5" placeholder="Enter description" id="description_service" ></textarea>
                         <div class="invalid-feedback">Please enter a description.</div>
                     </div>
 
                     <div class="mb-3">
                         <label for="date" class="form-label">Date:</label>
-                        <input type="date" name="date_service" class="form-control" id="date_service" >
+                        <input type="date" name="date" class="form-control" id="date_service" >
                         <div class="invalid-feedback">Please select a date.</div>
                     </div>
 

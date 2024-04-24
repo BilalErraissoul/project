@@ -10,11 +10,10 @@ class CreateServicesTable extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
-            $table->string('name_service');
-            $table->text('description_service');
-            $table->date('date_service');
-            $table->string('image');
-            $table->integer('épingler');
+            $table->string('name');
+            $table->text('description');
+            $table->date('date');
+            $table->string('image'); 
             $table->boolean('special')->default(false);  
             $table->boolean('carousel')->default(false);  
             $table->boolean('home')->default(false);  

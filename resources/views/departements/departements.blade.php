@@ -142,11 +142,11 @@
                         <!-- Departement Slides -->
                         @foreach ($departements as $departement)
                         <div class="swiper-slide">
-                            <img src="/images/{{ $departement->image }}" class="d-block w-100" alt="{{ $departement->name_departement }}">
+                            <img src="/images/{{ $departement->image }}" class="d-block w-100" alt="{{ $departement->name }}">
                             <div class="carousel-caption text-dark">
                                 <div class="annonce-info">
-                                    <h5>{{ $departement->name_departement }}</h5>
-                                    <p>{!! Str::words($departement->description_departement, 15, '...') !!}</p>
+                                    <h5>{{ $departement->name }}</h5>
+                                    <p>{!! Str::words($departement->description , 15, '...') !!}</p>
                                 </div>
                             </div>
                         </div>
@@ -183,14 +183,14 @@
                         <i class="fas fa-bell text-white"></i>
                     </div>
                     <!-- Remplacer 'image' et 'name_departement' par les noms des attributs correspondants dans votre modèle -->
-                    <img src="/images/{{ $departement->image }}" class="img-fluid rounded" alt="{{ $departement->name_departement }}" style="object-fit: cover; object-position: center; width: 100%;">
+                    <img src="/images/{{ $departement->image }}" class="img-fluid rounded" alt="{{ $departement->name  }}" style="object-fit: cover; object-position: center; width: 100%;">
                 </div>
             </div>
             <div class="col-md-8">
-                <h5 class="fw-bold text-dark" style="font-size: 20px;">{{ $departement->name_departement }}</h5>
+                <h5 class="fw-bold text-dark" style="font-size: 20px;">{{ $departement->name }}</h5>
                 <div class="departement-description" style="height: 72px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; font-size: 16px;">
                     <!-- Remplacer 'description_departement' par le nom de l'attribut correspondant dans votre modèle -->
-                    <p class="text-muted">{!! $departement->description_departement !!}</p>
+                    <p class="text-muted">{!! $departement->description  !!}</p>
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
                     <a href="{{ route('departements.show',['departement'=>$departement->id]) }}" class="text-primary" style="font-size: 18px;">Lire la suite</a>
@@ -212,13 +212,13 @@
         <div class="row align-items-center">
             <div class="col-md-4">
                 <!-- Remplacer 'image' et 'name_departement' par les noms des attributs correspondants dans votre modèle -->
-                <img src="/images/{{ $departement->image }}" class="img-fluid rounded" alt="{{ $departement->name_departement }}" style="object-fit: cover; object-position: center; width: 100%;">
+                <img src="/images/{{ $departement->image }}" class="img-fluid rounded" alt="{{ $departement->name  }}" style="object-fit: cover; object-position: center; width: 100%;">
             </div>
             <div class="col-md-8">
-                <h5 class="fw-bold text-dark" style="font-size: 20px;">{{ $departement->name_departement }}</h5>
+                <h5 class="fw-bold text-dark" style="font-size: 20px;">{{ $departement->name  }}</h5>
                 <div class="departement-description" style="height: 72px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; font-size: 16px;">
                     <!-- Remplacer 'description_departement' par le nom de l'attribut correspondant dans votre modèle -->
-                    <p class="text-muted">{!! $departement->description_departement !!}</p>
+                    <p class="text-muted">{!! $departement->description !!}</p>
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
                     <a href="{{ route('departements.show',['departement'=>$departement->id]) }}" class="text-primary" style="font-size: 18px;">Lire la suite</a>

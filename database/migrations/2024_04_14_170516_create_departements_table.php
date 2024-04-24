@@ -10,11 +10,10 @@ class CreateDepartementsTable extends Migration
     {
         Schema::create('departements', function (Blueprint $table) {
             $table->id();
-            $table->string('name_departement');
-            $table->text('description_departement');
-            $table->date('date_departement');
-            $table->string('image');
-            $table->integer('épingler');
+            $table->string('name');
+            $table->text('description');
+            $table->date('date');
+            $table->string('image'); 
             $table->boolean('special')->default(false);  
             $table->boolean('carousel')->default(false);  
             $table->boolean('home')->default(false);  

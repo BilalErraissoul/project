@@ -43,13 +43,13 @@ class ArticleController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        // dd($request->all());
         $request->validate([
             'name' => 'required',
-            'description_article' => 'required',
+            'description' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'date_article' => 'required|date',
+            'date' => 'required|date',
         ]);
-    
         $input = $request->all(); 
     
         if ($image = $request->file('image')) {
@@ -66,7 +66,7 @@ class ArticleController extends Controller
             $isépingler=0;
         }
       
-        $input['épingler'] = $isépingler;
+        $input['special'] = $isépingler;
         Article::create($input);
        
         return redirect()->route('articles.index')
@@ -106,9 +106,9 @@ class ArticleController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'description_article' => 'required',
+            'description' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'date_article' => 'required|date',
+            'date' => 'required|date',
         ]);
     
         $input = $request->all();
@@ -145,13 +145,13 @@ class ArticleController extends Controller
 public function articles(Request $request)
 {
     // Get pinned articles
-    $articlesEpingler = Article::where('épingler', 1)->orderBy('created_at', 'desc')->get();
+    $articlesEpingler = Article::where('special', 1)->orderBy('created_at', 'desc')->get();
     
     // Get non-pinned articles
-    $articlesNonEpingler = Article::where('épingler', 0)->orderBy('created_at', 'desc')->get();
+    $articlesNonEpingler = Article::where('special', 0)->orderBy('created_at', 'desc')->get();
     
     // Merge the collections
-    $articles = $articlesEpingler->merge($articlesNonEpingler);
+    $articles =  Article::where('carousel', 1)->get();
     
     // Pass the merged collection to the view
     return view('articles.articles', compact('articles', 'articlesNonEpingler', 'articlesEpingler'));

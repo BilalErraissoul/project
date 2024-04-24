@@ -128,11 +128,11 @@
                         <!-- Slides de votre carousel -->
                         @foreach ($annonces as $annonce)
                         <div class="swiper-slide">
-                            <img src="/images/{{ $annonce->image }}" class="d-block w-100" alt="{{ $annonce->name_annonce }}">
+                            <img src="/images/{{ $annonce->image }}" class="d-block w-100" alt="{{ $annonce->name}}">
                             <div class="carousel-caption text-dark">
                                 <div class="annonce-info">
-                                    <h5>{{ $annonce->name_annonce }}</h5>
-                                    <p>{!! Str::words($annonce->description_annonce, 15, '...') !!}</p>
+                                    <h5>{{ $annonce->name }}</h5>
+                                    <p>{!! Str::words($annonce->description , 15, '...') !!}</p>
                                 </div>
                             </div>
                         </div>
@@ -165,13 +165,13 @@
                     <div class="position-absolute top-0 start-0 p-2 bg-danger rounded-circle" style="font-size: 20px;">
                         <i class="fas fa-bell text-white"></i>
                     </div>
-                    <img src="/images/{{ $annonce->image }}" class="img-fluid rounded" alt="{{ $annonce->name_annonce }}" style="object-fit: cover; object-position: center; width: 100%;">
+                    <img src="/images/{{ $annonce->image }}" class="img-fluid rounded" alt="{{ $annonce->name }}" style="object-fit: cover; object-position: center; width: 100%;">
                 </div>
             </div>
             <div class="col-md-8">
-                <h5 class="fw-bold text-dark" style="font-size: 20px;">{{ $annonce->name_annonce }}</h5>
+                <h5 class="fw-bold text-dark" style="font-size: 20px;">{{ $annonce->name }}</h5>
                 <div class="annonce-description" style="height: 72px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; font-size: 16px;">
-                    <p class="text-muted">{!! $annonce->description_annonce !!}</p>
+                    <p class="text-muted">{!! $annonce->description !!}</p>
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
                     <a href="{{ route('annonces.show',['annonce'=>$annonce->id]) }}" class="text-primary" style="font-size: 18px;">Lire la suite</a>
@@ -191,12 +191,12 @@
         </div>
         <div class="row align-items-center">
             <div class="col-md-4">
-                <img src="/images/{{ $annonce->image }}" class="img-fluid rounded" alt="{{ $annonce->name_annonce }}" style="object-fit: cover; object-position: center; width: 100%;">
+                <img src="/images/{{ $annonce->image }}" class="img-fluid rounded" alt="{{ $annonce->name  }}" style="object-fit: cover; object-position: center; width: 100%;">
             </div>
             <div class="col-md-8">
-                <h5 class="fw-bold text-dark" style="font-size: 20px;">{{ $annonce->name_annonce }}</h5>
+                <h5 class="fw-bold text-dark" style="font-size: 20px;">{{ $annonce->name }}</h5>
                 <div class="annonce-description" style="height: 72px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; font-size: 16px;">
-                    <p class="text-muted">{!! $annonce->description_annonce !!}</p>
+                    <p class="text-muted">{!! $annonce->description  !!}</p>
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
                     <a href="{{ route('annonces.show',['annonce'=>$annonce->id]) }}" class="text-primary" style="font-size: 18px;">Lire la suite</a>
