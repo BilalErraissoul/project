@@ -37,9 +37,9 @@
                         <tr>
                             <td>{{ $service->id }}</td>
                             <td><img src="/images/{{ $service->image }}" width="100px" class="img-fluid rounded-circle" alt="Image"></td>
-                            <td>{{ $service->name_service }}</td>
-                            <td>{{ $service->description_service }}</td>
-                            <td>{{ $service->date_service }}</td>
+                            <td>{{ $service->name }}</td>
+                            <td>{!! $service->description !!}</td>
+                            <td>{{ $service->date }}</td>
                             <td>
                                 <form action="{{ route('services.destroy',$service->id) }}" method="POST">
                                     <a class="btn btn-info btn-sm" href="{{ route('services.show',$service->id) }}">Afficher</a>

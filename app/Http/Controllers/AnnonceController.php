@@ -108,9 +108,9 @@ class AnnonceController extends Controller
     public function update(Request $request, Annonce $annonce): RedirectResponse
     {
         $request->validate([
-            'name_annonce' => 'required',
-            'description_annonce' => 'required',
-            'date_annonce' => 'required|date',
+            'name' => 'required',
+            'description' => 'required',
+            'date' => 'required|date',
         ]);
     
         $input = $request->all();

@@ -31,19 +31,19 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Name:</strong>
-                <input type="text" name="name_departement" value="{{ $departement->name_departement }}" class="form-control" placeholder="Name">
+                <input type="text" name="name" value="{{ $departement->name }}" class="form-control" placeholder="Name">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Description:</strong>
-                <textarea class="form-control" style="height:150px" name="description_departement" placeholder="Description">{!! $departement->description_departement !!}</textarea>
+                <textarea class="form-control" style="height:150px" name="description" placeholder="Description" id="description_departement">{!! $departement->description !!}</textarea>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Date:</strong>
-                <input type="date" name="date_departement" value="{{ $departement->date_departement }}" class="form-control" placeholder="Date">
+                <input type="date" name="date" value="{{ $departement->date }}" class="form-control" placeholder="Date">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
@@ -58,4 +58,12 @@
         </div>
     </div>
 </form>
+<script src="https://cdn.ckeditor.com/ckeditor5/37.0.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#description_departement'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
 @endsection

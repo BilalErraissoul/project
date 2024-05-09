@@ -37,9 +37,9 @@
                         <tr>
                             <td>{{ $annonce->id }}</td>
                             <td><img src="/images/{{ $annonce->image }}" width="100px" class="img-fluid rounded-circle" alt="Image"></td>
-                            <td>{{ $annonce->name_annonce }}</td>
-                            <td >{!! $annonce->description_annonce !!}</td>
-                            <td>{{ $annonce->date_annonce }}</td>
+                            <td>{{ $annonce->name}}</td>
+                            <td >{!! $annonce->description !!}</td>
+                            <td>{{ $annonce->date }}</td>
                             <td>
                                 <form action="{{ route('annonces.destroy',$annonce->id) }}" method="POST">
                                     <a class="btn btn-info btn-sm" href="{{ route('annonces.show',$annonce->id) }}">Afficher</a>

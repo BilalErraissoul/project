@@ -31,9 +31,9 @@
         <tr>
             <td>{{ $event->id }}</td>
             <td><img src="/images/{{ $event->image }}" width="100px"></td>
-            <td>{{ $event->name_event }}</td>
-            <td>{{ $event->description_event }}</td>
-            <td>{{ $event->date_event }}</td>
+            <td>{{ $event->name }}</td>
+            <td>{!! $event->description !!}</td>
+            <td>{{ $event->date }}</td>
             <td>
                 <form action="{{ route('events.destroy',$event->id) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('events.show',$event->id) }}">Show</a>

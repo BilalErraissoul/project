@@ -33,8 +33,8 @@
             <td>{{ $article->id }}</td>
             <td><img src="/images/{{ $article->image }}" width="100px"></td>
             <td>{{ $article->name }}</td>
-            <td>{{ $article->description_article }}</td>
-            <td>{{ $article->date_article }}</td>
+            <td>{!! $article->description !!}</td>
+            <td>{{ $article->date }}</td>
             <td>
                 <form action="{{ route('articles.destroy',$article->id) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('articles.show',$article->id) }}">Show</a>

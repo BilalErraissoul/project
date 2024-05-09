@@ -105,9 +105,9 @@ class DepartementController extends Controller
     public function update(Request $request, Departement $departement): RedirectResponse
     {
         $request->validate([
-            'name_departement' => 'required',
-            'description_departement' => 'required',
-            'date_departement' => 'required|date',
+            'name' => 'required',
+            'description' => 'required',
+            'date' => 'required|date',
         ]);
     
         $input = $request->all();

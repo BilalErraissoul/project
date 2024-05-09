@@ -104,9 +104,9 @@ class EventController extends Controller
     public function update(Request $request, Event $event): RedirectResponse
     {
         $request->validate([
-            'name_event' => 'required',
-            'description_event' => 'required',
-            'date_event' => 'required|date',
+            'name' => 'required',
+            'description' => 'required',
+            'date' => 'required|date',
         ]);
     
         $input = $request->all();

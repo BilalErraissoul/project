@@ -37,9 +37,9 @@
                         <tr>
                             <td>{{ $departement->id }}</td>
                             <td><img src="/images/{{ $departement->image }}" width="100px" class="img-fluid rounded-circle" alt="Image"></td>
-                            <td>{{ $departement->name_departement }}</td>
-                            <td>{{ $departement->description_departement }}</td>
-                            <td>{{ $departement->date_departement }}</td>
+                            <td>{{ $departement->name}}</td>
+                            <td>{!! $departement->description !!}</td>
+                            <td>{{ $departement->date }}</td>
                             <td>
                                 <form action="{{ route('departements.destroy',$departement->id) }}" method="POST">
                                     <a class="btn btn-info btn-sm" href="{{ route('departements.show',$departement->id) }}">Afficher</a>

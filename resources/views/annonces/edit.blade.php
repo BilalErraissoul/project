@@ -31,19 +31,19 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Name:</strong>
-                    <input type="text" name="name_annonce" value="{{ $annonce->name_annonce }}" class="form-control" placeholder="Name">
+                    <input type="text" name="name" value="{{ $annonce->name }}" class="form-control" placeholder="Name">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Description:</strong>
-                    <textarea class="form-control" style="height: 150px" name="description_annonce" id="description_annonce" placeholder="Description">{{ $annonce->description_annonce }}</textarea>
+                    <textarea class="form-control" style="height: 150px" name="description" id="description_annonce" placeholder="Description">{{ $annonce->description }}</textarea>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Date:</strong>
-                    <input type="date" name="date_annonce" value="{{ $annonce->date_annonce }}" class="form-control" placeholder="Date">
+                    <input type="date" name="date" value="{{ $annonce->date }}" class="form-control" placeholder="Date">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">

@@ -31,19 +31,19 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Name:</strong>
-                    <input type="text" name="name_event" value="{{ $event->name_event }}" class="form-control" placeholder="Name">
+                    <input type="text" name="name" value="{{ $event->name }}" class="form-control" placeholder="Name">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Description:</strong>
-                    <textarea class="form-control" style="height:150px" name="description_event" placeholder="Description">{{ $event->description_event }}</textarea>
+                    <textarea class="form-control" style="height:150px" name="description" id="description_event" placeholder="Description">{{ $event->description }}</textarea>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Date:</strong>
-                    <input type="date" name="date_event" value="{{ $event->date_event }}" class="form-control" placeholder="Date">
+                    <input type="date" name="date" value="{{ $event->date }}" class="form-control" placeholder="Date">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
@@ -67,4 +67,12 @@
         </div>
      
     </form>
+    <script src="https://cdn.ckeditor.com/ckeditor5/37.0.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#description_event'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
 @endsection

@@ -31,19 +31,19 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Name:</strong>
-                    <input type="text" name="name_service" value="{{ $service->name_service }}" class="form-control" placeholder="Name">
+                    <input type="text" name="name" value="{{ $service->name }}" class="form-control" placeholder="Name">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Description:</strong>
-                    <textarea class="form-control" style="height:150px" name="description_service" placeholder="Description">{{ $service->description_service }}</textarea>
+                    <textarea class="form-control" style="height:150px" name="description" id="description_service" placeholder="Description">{!! $service->description !!}</textarea>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Date:</strong>
-                    <input type="date" name="date_service" value="{{ $service->date_service }}" class="form-control" placeholder="Date">
+                    <input type="date" name="date" value="{{ $service->date }}" class="form-control" placeholder="Date">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
@@ -59,4 +59,12 @@
         </div>
      
     </form>
+    <script src="https://cdn.ckeditor.com/ckeditor5/37.0.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#description_service'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
 @endsection

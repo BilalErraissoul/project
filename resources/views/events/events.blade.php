@@ -13,7 +13,27 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
        
+/* Style du conteneur du titre d'événement */
+.event-title {
+    background-color: #f6f9ff; /* Couleur de fond */
+    padding: 20px; /* Espacement intérieur */
+    border-radius: 5px; /* Coins arrondis */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Légère ombre */
+}
 
+/* Style du titre */
+.event-title h1 {
+    color: #003366; /* Couleur du texte */
+    font-size: 20px; /* Taille de la police */
+    font-weight: bold; /* Gras */
+    display: inline-block; /* Affichage en ligne pour le centrage vertical */
+}
+
+/* Style de l'icône awesome */
+.event-title h1 i {
+    margin-right: 10px; /* Espacement entre l'icône et le texte */
+    color: #007bff; /* Couleur de l'icône */
+} 
         /* Carousel Styles */
     .carousel-item img {
         max-height: 300px;
@@ -107,6 +127,18 @@
 .annonce-info p {
     font-size: 12px; /* Taille du texte réduite */
 }
+/* CSS for bell icon hover effect */
+.bell-icon:hover {
+    transform: scale(1.1); /* Scale up on hover */
+}
+<style>
+    .list-group-item {
+        transition: background-color 0.3s ease; /* Smooth transition effect */
+    }
+
+    .list-group-item:hover {
+        background-color: #f8f9fa; /* Light gray background on hover */
+    }
     </style>
 </head>
 <body>
@@ -128,24 +160,22 @@
 </script>
 
 
-<div class="container col-10">
-    <div class="container col-11">
-        <div class="row justify-content-center align-items-center mb-5">
-            <!-- Departement Information -->
-            <div class="col-lg-3 bg-light p-4 rounded">
-                <img src="{{ asset('images/fslogo.png') }}" alt="University Logo" style="width: 100%; height: auto;">
-                <div class="mt-3 text-center">
-                    <h1 class="fw-bold">FS-UCD</h1>
-                    <h6 class="fw-bold">FACULTÉ DES SCIENCES</h6>
-                    <p>EL JADIDA</p>
-                </div>
+<div class="container col-11">
+<div class="container col-12 mt-4">
+    <div class="row justify-content-center align-items-start mb-5">
+        <!-- Department Information -->
+        <div class="col-lg-3 bg-light p-1 rounded d-flex flex-column align-items-center"> <!-- Added utility classes for centering -->
+            <img src="{{ asset('images/fslogo.png') }}" alt="University Logo" style="max-width: 200px; height: auto;"> <!-- Adjusted logo size -->
+            <div class="mt-3 text-center">
+                <h1 class="fw-bold">FS-UCD</h1> <!-- Adjusted heading size -->
+                <h6 class="fw-bold">FACULTÉ DES SCIENCES</h6> <!-- Adjusted heading size -->
+                <p>EL JADIDA</p>
             </div>
-
-            <div class="col-lg-9">
-                <div class="swiper mySwiper">
-                    <div class="swiper-wrapper">
-                        
-                        @foreach ($Events as $event)
+        </div>
+        <div class="col-lg-9 d-flex align-items-start justify-content-center"> <!-- Adjusted alignment to align items at the top -->
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                @foreach ($Events as $event)
                         <div class="swiper-slide">
                             <img src="/images/{{ $event->image }}" class="d-block w-100" alt="{{ $event->name  }}">
                             <div class="carousel-caption text-dark">
@@ -156,34 +186,89 @@
                             </div>
                         </div>
                         @endforeach
-                    </div>
-                    <!-- Pagination -->
-                    <div class="swiper-pagination"></div>
-                    <!-- Navigation Buttons -->
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
                 </div>
+                <!-- Pagination -->
+                <div class="swiper-pagination"></div>
+                <!-- Navigation Buttons -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
             </div>
+            
         </div>
+        
     </div>
+</div>
+
+@push('scripts')
+    <script>
+        var swiper = new Swiper('.mySwiper', {
+            slidesPerView: 'auto', // Set the number of slides per view to 'auto' to fit as many slides as possible without stretching
+            spaceBetween: 30, // Optional: Set the space between slides
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    </script>
+@endpush
 
 
-    <hr style="border-top: 2px solid #003366; margin-top: 20px; margin-bottom: 20px;">
+
+
+
+
     
-
-    <div class="container-fluid bg-gradient">
+<div class="container-fluid bg-gradient">
     <div class="row justify-content-between">
-        <div class="col-lg-9">  
-            <h1 class="mb-4" style="color: #003366; font-size: 36px; font-weight: bold;">LISTE DES EVENEMENTS</h1>
+   
+    
+    <div class="col-lg-3">
+    <div class="quick-access">
+    <div class="event-title "> <h2 class="mb-4"><i class="fas fa-compass me-2"></i> Accès Rapide</h2></div>
+       
+        <ul class="list-group">
+        <li class="list-group-item border-0 mt-3">
+                <a href="{{ route('events') }}" class="text-decoration-none text-dark">Événements</a>
+            </li>
+            <li class="list-group-item border-0">
+                <a href="{{ route('articles') }}" class="text-decoration-none text-dark">Articles</a>
+            </li>
+            <li class="list-group-item border-0">
+                <a href="{{ route('departements') }}" class="text-decoration-none text-dark">Départements</a>
+            </li>
+            <li class="list-group-item border-0">
+                <a href="{{ route('annonces') }}" class="text-decoration-none text-dark">Annonces</a>
+            </li>
+            <li class="list-group-item border-0">
+                <a href="{{ route('services') }}" class="text-decoration-none text-dark">Services</a>
+            </li>
+        </ul>
+    </div>
+</div>
+   
+<div class="col-lg-9">
+    <div class="mb-4">
+    <div class="mb-4">
+   
+
+</div>
+
+        <div class=" p-3 mb-4">
+            <!-- Liste des événements Section -->
+            <div class="event-title d-flex justify-content-between align-items-center">
+    <h1 class="mb-4"><i class="fas fa-calendar-alt"></i>ÉVÉNEMENTS</h1>
+</div>
             <!-- Events Section -->
             @foreach ($eventsEpingler as $event)
-                <div class="event-item mb-4 p-3" style="background-color: #f8f9fa; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                    <div class="progress mb-2" style="height: 2px;">
-                        <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
+            <div class="article-item mb-4 p-3 mt-4" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); border: 1px solid #ccc;">
+                    
                     <div class="row align-items-center">
                         <div class="col-md-5 position-relative overflow-hidden">
-                            <img src="/images/{{ $event->image }}" class="img-fluid rounded" alt="{{ $event->name }}">
+                            <img src="/images/{{ $event->image }}" class="img-fluid rounded" style="width: 100%; height: 150px; object-fit: cover;" alt="{{ $event->name }}">
                             <div class="position-absolute top-0 start-3 p-2 bg-danger rounded-circle">
                                 <i class="fas fa-bell text-white"></i>
                             </div>
@@ -192,7 +277,7 @@
                             <h5>{{ $event->name  }}</h5>
                             <div class="description-container" style="max-height: 5em; overflow: hidden; position: relative;">
                                 <p class="description-text" style="margin: 0;">{!! $event->description  !!}</p>
-                                <span class="more-indicator" style="position: absolute; bottom: 0; right: 0;">...</span>
+                                <span class="more-indicator" style="position: absolute; bottom: 0; right: 0;"></span>
                             </div>
                             <div class="d-flex justify-content-between align-items-center" style="margin-top: 10px;">
                                 <a href="{{ route('events.show',['event'=>$event->id]) }}" class="text-primary">En savoir plus</a>
@@ -204,19 +289,17 @@
             @endforeach
 
             @foreach ($eventsNonEpingler as $event)
-                <div class="event-item mb-4 p-3" style="background-color: #f8f9fa; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                    <div class="progress mb-2" style="height: 2px;">
-                        <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
+            <div class="article-item mb-4 p-3 mt-4" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); border: 1px solid #ccc;">
+                    
                     <div class="row align-items-center">
                         <div class="col-md-5">
-                            <img src="/images/{{ $event->image }}" class="img-fluid rounded" alt="{{ $event->name }}">
+                            <img src="/images/{{ $event->image }}" class="img-fluid rounded" style="width: 100%; height: 150px; object-fit: cover;" alt="{{ $event->name }}">
                         </div>
                         <div class="col-md-7">
                             <h5>{{ $event->name }}</h5>
                             <div class="description-container" style="max-height: 5em; overflow: hidden; position: relative;">
                                 <p class="description-text" style="margin: 0;">{!! $event->description  !!}</p>
-                                <span class="more-indicator" style="position: absolute; bottom: 0; right: 0;">...</span>
+                                <span class="more-indicator" style="position: absolute; bottom: 0; right: 0;"></span>
                             </div>
                             <div class="d-flex justify-content-between align-items-center" style="margin-top: 10px;">
                                 <a href="{{ route('events.show',['event'=>$event->id]) }}" class="text-primary">En savoir plus</a>
@@ -229,87 +312,11 @@
           
         </div>
         
-        <div class="col-lg-3">
-            <div class="quick-access">
-                <h2>Accès Rapide</h2>
-                <ul>
-                <li><a href="{{ route('events') }}">Événements</a></li>
-                    <li><a href="{{ route('articles') }}">Articles</a></li>
-                    <li><a href="{{ route('departements') }}">Départements</a></li>
-                    <li><a href="{{ route('annonces') }}">Annonces</a></li>
-                    <li><a href="{{ route('services') }}">Services</a></li>
-                    
-                </ul>
-            </div>
-            <div class="row"> 
-                <div class="col-12">
-                    <div class="panel panel-default">
-                    <div class="panel-heading">
-        <h1 class="panel-title" style="font-weight: bold"><i class="fa fa-pie-chart" id="titre-panel"></i>&nbsp;STATISTIQUES</h1>
-    </div>
-    <div class="panel-body" id="biblio">
-        <ul class="list-group" style="font-size: 14px;">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                ETUDIANTS
-                <span class="badge bg-primary">11920</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                FORMATIONS
-                <span class="badge bg-primary">26</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                DEPARTEMENTS
-                <span class="badge bg-primary">13</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                LABORATOIRES
-                <span class="badge bg-primary">9</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                FORMATIONS DOCTORALES
-                <span class="badge bg-primary">6</span>
-            </li>
-        </ul>
-    </div>
-                    </div>
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h1 class="panel-title" id="titre-panel"><i class="fa fa-book" id="titre-panel"></i>&nbsp;ESPACE ETUDIANT</h1>
-                        </div>
-                        <div class="panel-body" id="biblio">
-                            <a href="" target="blank">RESULTATS</a><BR>
-                        </div>
-                    </div>
-                </div> 
-         </div>
-         <div class="row">
-            <div class="col-12">
-                <!-- Your existing content goes here -->
-            </div>
-            <div class="col-12">
-                <div class="panel panel-danger">
-                    <div class="panel-heading">
-                        <h1 class="panel-title" id="titre-panel"><i class="fa fa-edit" id="titre-panel"></i>&nbsp;Bibliothèque</h1>
-                    </div>
-                    <div class="panel-body" id="biblio">
-                        <strong>en construction</strong>
-                    </div>
-                </div>
-                <div class="panel panel-danger">
-                    <div class="panel-heading">
-                        <h1 class="panel-title" id="titre-panel"><i class="fa fa-edit" id="titre-panel"></i>&nbsp;Réclamations<br/>الشكايات</h1>
-                    </div>
-                    <div class="panel-body" id="biblio">
-                        <a href="#" target="_blank">الشكايات المتعلقة بالنتائج</a><br>
-                    </div>
-                </div>
+       </div>
             </div>
         </div>
         </div>
-    </div> 
-</div> 
-
-
+</div>
 <!-- Include the Font Awesome stylesheet -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 

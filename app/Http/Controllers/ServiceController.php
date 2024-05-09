@@ -104,9 +104,9 @@ class ServiceController extends Controller
     public function update(Request $request, Service $service): RedirectResponse
     {
         $request->validate([
-            'name_service' => 'required',
-            'description_service' => 'required',
-            'date_service' => 'required|date',
+            'name' => 'required',
+            'description' => 'required',
+            'date' => 'required|date',
         ]);
     
         $input = $request->all();

@@ -14,15 +14,17 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">My Interface</a>
+<h1 class="logo h4 text-white bg-info p-2 rounded">UCD-FS</h1>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <button type="button" class="btn btn-secondary">Logout</button>
-        </li>
+        <form method="POST" action="{{ route('admin.logout') }}">
+    @csrf
+    <button type="submit" class="btn btn-secondary">Logout</button>
+</form>        </li>
         <!-- Button trigger modal -->
         
       </ul>
@@ -38,6 +40,10 @@
       <a href="{{ route('admin.events') }}" class="list-group-item list-group-item-action">Add Event</a>
       <a href="#" class="list-group-item list-group-item-action">Add Mot de doyen</a>
       <a href="{{ route('admin.services') }}" class="list-group-item list-group-item-action">Add service</a>
+      <a href="{{ route('admin.formations') }}" class="list-group-item list-group-item-action">Add Formation</a>
+      <a href="{{ route('admin.recherches') }}" class="list-group-item list-group-item-action">Add Recherche</a>
+
+
       </div>
     
     </div>
@@ -88,7 +94,7 @@
                     <tr>
                         <td>{{ $event->id }}</td>
                         <td>{{ $event->name }}</td>
-                        <td>{!! Str::words($event->description , 10, '...') !!}</td>
+                        <td>{!! Str::words($event->description, 10, '...') !!}</td>
                         <td>{{ $event->date}}</td>
                         <td>
                             <input type="checkbox" class="checkbox" data-item-id="{{ $event->id }}" data-field="special" {{ $event->special ? 'checked' : '' }} onclick="updateCheckbox('{{ $event->id }}', 'special')">
