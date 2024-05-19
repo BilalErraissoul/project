@@ -10,7 +10,7 @@ use Illuminate\View\View;
 class DoyenController extends Controller
 {
     /**
-     * Affiche une liste des ressources.
+     * Display a listing of the resource.
      *
      * @return \Illuminate\View\View
      */
@@ -21,11 +21,9 @@ class DoyenController extends Controller
         return view('doyens.index', compact('doyens'))
                     ->with('i', (request()->input('page', 1) - 1) * 5);
     }
-    
 
-   
     /**
-     * Affiche le formulaire de création d'une nouvelle ressource.
+     * Show the form for creating a new resource.
      *
      * @return \Illuminate\View\View
      */
@@ -35,7 +33,7 @@ class DoyenController extends Controller
     }
   
     /**
-     * Stocke une nouvelle ressource dans le stockage.
+     * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
@@ -44,10 +42,11 @@ class DoyenController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'description' => 'required',
-            'date' => 'required|date',
+            'title' => 'required',
+            'message' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-    
+
         $input = $request->all(); 
     
         if ($image = $request->file('image')) {
@@ -57,17 +56,15 @@ class DoyenController extends Controller
             $input['image'] = $profileImage;
         }
 
-        $isEpingler = $request->has('epingler') ? 1 : 0;
-      
-        $input['special'] = $isEpingler;
+        $input['special'] = $request->has('special') ? 1 : 0;
         Doyen::create($input);
        
         return redirect()->route('doyens.index')
-                        ->with('success', 'Doyen créé avec succès.');
+                        ->with('success', 'Doyen created successfully.');
     }
   
     /**
-     * Affiche la ressource spécifiée.
+     * Display the specified resource.
      *
      * @param  \App\Models\Doyen  $doyen
      * @return \Illuminate\View\View
@@ -78,7 +75,7 @@ class DoyenController extends Controller
     }
   
     /**
-     * Affiche le formulaire pour modifier la ressource spécifiée.
+     * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Doyen  $doyen
      * @return \Illuminate\View\View
@@ -89,7 +86,7 @@ class DoyenController extends Controller
     }
   
     /**
-     * Met à jour la ressource spécifiée dans le stockage.
+     * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Doyen  $doyen
@@ -99,8 +96,8 @@ class DoyenController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'description' => 'required',
-            'date' => 'required|date',
+            'title' => 'required',
+            'message' => 'required',
         ]);
     
         $input = $request->all();
@@ -117,11 +114,11 @@ class DoyenController extends Controller
         $doyen->update($input);
       
         return redirect()->route('doyens.index')
-                        ->with('success', 'Doyen mis à jour avec succès.');
+                        ->with('success', 'Doyen has been updated successfully.');
     }
   
     /**
-     * Supprime la ressource spécifiée du stockage.
+     * Remove the specified resource from storage.
      *
      * @param  \App\Models\Doyen  $doyen
      * @return \Illuminate\Http\RedirectResponse
@@ -131,6 +128,53 @@ class DoyenController extends Controller
         $doyen->delete();
          
         return redirect()->route('doyens.index')
-                        ->with('success', 'Doyen supprimé avec succès.');
+                        ->with('success', 'Doyen has been deleted successfully.');
+    }
+
+    /**
+     * Display a listing of the resource with special field.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\View\View
+     */
+    public function doyens(Request $request): View
+    {
+        // Get pinned doyens
+        $doyensEpingler = Doyen::where('special', 1)->orderBy('created_at', 'desc')->get();
+        
+        // Get non-pinned doyens
+        $doyensNonEpingler = Doyen::where('special', 0)->orderBy('created_at', 'desc')->get();
+        
+        // Merge the collections
+        $doyens = Doyen::where('special', 1)->get();
+        
+        // Pass the merged collection to the view
+        return view('doyens.doyens', compact('doyens', 'doyensNonEpingler', 'doyensEpingler'));
+    }
+
+    /**
+     * Update the specified checkbox field of the resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateCheckbox(Request $request)
+    {
+        $id = $request->id;
+        $field = $request->field;
+
+        $doyen = Doyen::find($id);
+        if (!$doyen) {
+            return response()->json(['error' => 'Doyen not found.']);
+        }
+
+        // Invert the value of the checkbox field
+        $doyen->$field = !$doyen->$field;
+
+        if ($doyen->save()) {
+            return response()->json(['success' => 'Checkbox updated successfully.']);
+        } else {
+            return response()->json(['error' => 'Failed to update checkbox.']);
+        }
     }
 }

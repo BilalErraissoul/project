@@ -12,9 +12,10 @@
   use App\Http\Controllers\DoyenController;
   use App\Http\Controllers\FormationController;
   use App\Http\Controllers\RechercheController;
-  
 
-  
+
+  Route::get('/doyens/listeDoyens', [DoyenController::class, 'index'])->name('doyens');
+
   Route::get('/events/listeEvents', [EventController::class, 'events'])->name('events');
   Route::resource('events', EventController::class);
   Route::get('/articles/listeArticles', [ArticleController::class, 'articles'])->name('articles');
@@ -40,8 +41,14 @@ Route::middleware('auth')->group(function () {
     // Define other admin routes here...
 });
 
+// routes/web.php
+Route::get('/mot-de-doyen', function () {
+  return view('motdedoyen');
+})->name('motdedoyen');
 
 
+
+Route::resource('doyens', DoyenController::class);
 
   Route::resource('annonces', AnnonceController::class);
   Route::resource('articles', ArticleController::class);
@@ -64,6 +71,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/formations', [AdminController::class, 'formations'])->name('admin.formations');
     Route::get('/admin/recherches', [AdminController::class, 'recherches'])->name('admin.recherches');
     Route::get('/admin/departements', [AdminController::class, 'departements'])->name('admin.departements');
+    Route::get('/admin/doyens', [DoyenController::class, 'doyens'])->name('admin.doyens');
+
 });
 
   Route::post('/update-checkboxAnonce', [AnnonceController::class,'updateCheckbox'])->name('update.annonces.checkbox');
@@ -73,6 +82,7 @@ Route::middleware('auth')->group(function () {
   Route::post('/update-checkboxService', [ServiceController::class,'updateCheckbox'])->name('update.annonces.checkbox');
   Route::post('/update-checkboxFormation', [FormationController::class, 'updateCheckbox'])->name('update.formations.checkbox');
   Route::post('/update-checkboxRecherche', [RechercheController::class, 'updateCheckbox'])->name('update.recherches.checkbox');
+  Route::post('/update-checkboxRecherche', [DoyenController::class, 'updateCheckbox'])->name('update.doyens.checkbox');
 
 
 

@@ -2,345 +2,249 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UCD FS</title> 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"  />
-    <link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-       
-
-        /* Carousel Styles */
-    .carousel-item img {
-        max-height: 300px;
-        object-fit: cover;
-    }
-
-    .quick-access {
-        background-color: #f8f9fa;
-        padding: 20px;
-        border-radius: 5px;
-        margin-top: 20px;
-    }
-
-    .quick-access h2 {
-        margin-bottom: 20px;
-        font-size: 20px;
-        color: #003366;
-    }
-
-    .quick-access ul {
-        list-style-type: none;
-        padding: 0;
-    }
-
-    .quick-access ul li {
-        margin-bottom: 10px;
-    }
-
-    .quick-access ul li a {
-        text-decoration: none;
-        color: #0069d9;
-        font-weight: bold;
-        transition: color 0.3s;
-    }
-
-    .quick-access ul li a:hover {
-        color: #0056b3;
-    }
-
-    /* Panel Styles */
-    .panel-heading {
-        background-color: #007bff;
-        color: white;
-        padding: 10px 20px;
-        border-radius: 5px 5px 0 0;
-    }
-
-    .panel-title {
-        margin: 0;
-        font-size: 20px;
-    }
-
-    .panel-body {
-        padding: 20px;
-    }
-
-    .panel-body a {
-        color: #007bff;
-        font-weight: bold;
-    }
-
-    .panel-body a:hover {
-        color: #0056b3;
-    }
-
-    .swiper {
-        width:100%;
-        height: 400px;
-    }
-
-    /* Style pour le titre et la description de l'annonce */
-    .annonce-info {
-    background-color: rgba(248, 249, 250, 0.7); /* Couleur de fond avec transparence */
-    backdrop-filter: blur(10px); /* Effet de flou */
-    color: #212529; /* Couleur du texte */
-    padding: 10px; /* Réduire l'espacement intérieur */
-    border-radius: 10px; /* Coins arrondis */
-    margin-top: 20px; /* Marge supérieure */
-    text-align: center; /* Centrage du texte */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Légère ombre */
-    transition: all 0.3s ease; /* Animation de transition */
-    width: 60%; /* Largeur de 60% */
-    margin: 20px auto; /* Centrage horizontal */
-}
-
-.annonce-info h5 {
-    margin-bottom: 6px; /* Espacement sous le titre */
-    font-size: 18px; /* Taille du titre réduite */
-}
-
-.annonce-info p {
-    font-size: 12px; /* Taille du texte réduite */
-}
-    </style>
+    <title>Admin</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>
 </head>
 <body>
-    @include('header')
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<h1 class="logo h4 text-white bg-info p-2 rounded">UCD-FS</h1>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+        <form method="POST" action="{{ route('admin.logout') }}">
+    @csrf
+    <button type="submit" class="btn btn-secondary">Logout</button>
+</form>        </li>
+        <!-- Button trigger modal -->
+      </ul>
+    </div>
+</nav>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-3">
+      <div class="list-group" id="list-tab" role="tablist">
+        <a href="{{ route('admin.index') }}" class="list-group-item list-group-item-action active">Add annonce</a>
+        <a href="{{ route('admin.articles') }}" class="list-group-item list-group-item-action">Add article</a>
+        <a href="{{ route('admin.departements') }}" class="list-group-item list-group-item-action">Add departments</a>
+        <a href="{{ route('admin.events') }}" class="list-group-item list-group-item-action">Add Event</a>
+        <a href="{{ route('admin.doyens') }}" class="list-group-item list-group-item-action ">Add Mot de doyen</a>
+        <a href="{{ route('admin.services') }}" class="list-group-item list-group-item-action">Add service</a>
+        <a href="{{ route('admin.formations') }}" class="list-group-item list-group-item-action">Add Formation</a>
+        <a href="{{ route('admin.recherches') }}" class="list-group-item list-group-item-action">Add Recherche</a>
 
+
+      </div>
+    </div>
+    <div class="col-9">
+      <div class="row">
+        <div class="col-12 mb-4 d-flex justify-content-end">
+          <button type="button" class="btn btn-primary ml-2" id="saveBtn" data-toggle="modal" data-target="#addDoyenModal">
+            Add doyen
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group row">
+            <input type="text" id="keyword" class="form-control mr-2 col-8" placeholder="Enter keyword">
+            <select id="filter" class="form-control col-3">
+              <option selected value="0">Filter by Column</option>
+              <option value="1">Title</option>
+              <option value="2">Modified At</option>
+              <option value="3">Description</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+          <!-- Table -->
+          <div class="table-responsive">
+            <table id="table" class="table table-striped">
+              <thead class="thead-dark">
+                <tr>
+                  <th>ID</th>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Date</th>
+                  <th>Special</th>
+                  <th>Carousel</th>
+                  <th>Home</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Replace services with doyen in the loop -->
+                @foreach ($doyens as $doyen)
+                <tr>
+                  <td>{{ $doyen->id }}</td>
+                  <td>{{ $doyen->name }}</td>
+                  <td>{!! Str::words($doyen->description, 10, '...') !!}</td>
+                  <td>{{ $doyen->date }}</td>
+                  <td>
+                    <input type="checkbox" class="checkbox" data-item-id="{{ $doyen->id }}" data-field="special" {{ $doyen->special ? 'checked' : '' }} onclick="updateCheckbox('{{ $doyen->id }}', 'special')">
+                  </td>
+                  <td>
+                    <input type="checkbox" class="checkbox" data-item-id="{{ $doyen->id }}" data-field="carousel" {{ $doyen->carousel ? 'checked' : '' }} onclick="updateCheckbox('{{ $doyen->id }}', 'carousel')">
+                  </td>
+                  <td>
+                    <input type="checkbox" class="checkbox" data-item-id="{{ $doyen->id }}" data-field="home" {{ $doyen->home ? 'checked' : '' }} onclick="updateCheckbox('{{ $doyen->id }}', 'home')">
+                  </td>
+                  <td>
+                    <div class="btn-group" role="group" aria-label="Actions">
+                      <a class="btn btn-info btn-sm" href="{{ route('doyens.show',$doyen->id) }}">Show</a>
+                      <a class="btn btn-primary btn-sm" href="{{ route('doyens.edit',$doyen->id) }}">Edit</a>
+                      <form action="{{ route('doyens.destroy',$doyen->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this doyen?')">Delete</button>
+                      </form>
+                    </div>
+                  </td>
+                </tr>
+                @endforeach
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addDoyenModal" tabindex="-1" role="dialog" aria-labelledby="addDoyenModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div id="formErrors" class="alert alert-danger" style="display: none;"></div>
+      <div class="modal-header">
+        <h5 class="modal-title" id="addDoyenModalLabel">Add New doyen</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- doyen form goes here -->
+        <form id="myForm" action="{{ route('doyens.store') }}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+          @csrf
+          <div class="mb-3">
+            <label for="name" class="form-label">Name:</label>
+            <input type="text" name="name" class="form-control" id="name_doyen" placeholder="Enter name">
+            @error('name')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description:</label>
+            <textarea class="form-control" name="description" rows="5" placeholder="Enter description" id="description_doyen"></textarea>
+            <div class="invalid-feedback">Please enter a description.</div>
+          </div>
+          <div class="mb-3">
+            <label for="date" class="form-label">Date:</label>
+            <input type="date" name="date" class="form-control" id="date_doyen">
+            <div class="invalid-feedback">Please select a date.</div>
+          </div>
+          <div class="mb-3">
+            <label for="image" class="form-label">Image:</label>
+            <input type="file" name="image" class="form-control-file" id="image_doyen">
+            <div class="invalid-feedback">Please select an image.</div>
+          </div>
+          <div class="form-check mb-3">
+            <input type="checkbox" name="épingler" id="épingler" class="form-check-input">
+            <label for="épingler" class="form-check-label">Pin this doyen</label>
+          </div>
+          <div class="d-grid gap-2">
+            <button type="button" id="submitFormBtn" class="btn btn-primary btn-lg btn-block fw-bold animate__animated animate__fadeInUp">Submit</button>
+            <button type="button" class="btn btn-secondary btn-lg btn-block fw-bold animate__animated animate__fadeInUp" data-dismiss="modal">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var dropdownToggle = document.querySelector('.dropdown-toggle');
-        var dropdownMenu = document.querySelector('.dropdown-menu');
-
-        dropdownToggle.addEventListener('click', function() {
-            if (!dropdownMenu.classList.contains('show')) {
-                dropdownMenu.classList.add('show');
-            } else {
-                dropdownMenu.classList.remove('show');
-            }
-        });
+  function updateCheckbox(id, field) {
+    $.ajax({
+      url: '/update-checkboxDoyen',
+      method: 'POST',
+      data: {
+        id: id,
+        field: field,
+        _token: '{{ csrf_token() }}'
+      },
+      success: function(response) {
+        console.log(response);
+      },
+      error: function(xhr) {
+        console.error(xhr.responseText);
+      }
     });
+  }
 </script>
-
-
-<div class="container col-10">
-    <div class="container col-11">
-        <div class="row justify-content-center align-items-center mb-5">
-            <!-- Departement Information -->
-            <div class="col-lg-3 bg-light p-4 rounded">
-                <img src="{{ asset('images/fslogo.png') }}" alt="University Logo" style="width: 100%; height: auto;">
-                <div class="mt-3 text-center">
-                    <h1 class="fw-bold">FS-UCD</h1>
-                    <h6 class="fw-bold">FACULTÉ DES SCIENCES</h6>
-                    <p>EL JADIDA</p>
-                </div>
-            </div>
-
-            <div class="col-lg-9">
-                <div class="swiper mySwiper">
-                    <div class="swiper-wrapper">
-                        
-                        @foreach ($Events as $event)
-                        <div class="swiper-slide">
-                            <img src="/images/{{ $event->image }}" class="d-block w-100" alt="{{ $event->name  }}">
-                            <div class="carousel-caption text-dark">
-                                <div class="annonce-info">
-                                    <h5>{{ $event->name }}</h5>
-                                    <p>{!! Str::words($event->description , 15, '...') !!}</p>
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
-                    </div>
-                    <!-- Pagination -->
-                    <div class="swiper-pagination"></div>
-                    <!-- Navigation Buttons -->
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <hr style="border-top: 2px solid #003366; margin-top: 20px; margin-bottom: 20px;">
-    
-
-    <div class="container-fluid bg-gradient">
-    <div class="row justify-content-between">
-        <div class="col-lg-9">  
-            <h1 class="mb-4" style="color: #003366; font-size: 36px; font-weight: bold;">LISTE DES DOYENS</h1>
-            @foreach ($doyensEpingler as $doyen)
-    <div class="event-item mb-4 p-3" style="background-color: #f8f9fa; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-        <div class="progress mb-2" style="height: 2px;">
-            <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-        <div class="row align-items-center">
-            <div class="col-md-5 position-relative overflow-hidden">
-                <img src="/images/{{ $doyen->image }}" class="img-fluid rounded" alt="{{ $doyen->name }}">
-                <div class="position-absolute top-0 start-3 p-2 bg-danger rounded-circle">
-                    <i class="fas fa-bell text-white"></i>
-                </div>
-            </div>
-            <div class="col-md-7">
-                <h5>{{ $doyen->name }}</h5>
-                <div class="description-container" style="max-height: 5em; overflow: hidden; position: relative;">
-                    <p class="description-text" style="margin: 0;">{!! $doyen->description !!}</p>
-                    <span class="more-indicator" style="position: absolute; bottom: 0; right: 0;">...</span>
-                </div>
-                <div class="d-flex justify-content-between align-items-center" style="margin-top: 10px;">
-                    <a href="{{ route('events.show',['event'=>$doyen->id]) }}" class="text-primary">En savoir plus</a>
-                    <p style="margin-bottom: 0;">{{ \Carbon\Carbon::parse($doyen->created_at)->format('D M d Y H:i') }}</p>
-                </div>
-            </div>
-        </div>
-    </div>
-@endforeach
-
-@foreach ($doyensNonEpingler as $doyen)
-    <div class="event-item mb-4 p-3" style="background-color: #f8f9fa; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-        <div class="progress mb-2" style="height: 2px;">
-            <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-        <div class="row align-items-center">
-            <div class="col-md-5">
-                <img src="/images/{{ $doyen->image }}" class="img-fluid rounded" alt="{{ $doyen->name }}">
-            </div>
-            <div class="col-md-7">
-                <h5>{{ $doyen->name }}</h5>
-                <div class="description-container" style="max-height: 5em; overflow: hidden; position: relative;">
-                    <p class="description-text" style="margin: 0;">{!! $doyen->description !!}</p>
-                    <span class="more-indicator" style="position: absolute; bottom: 0; right: 0;">...</span>
-                </div>
-                <div class="d-flex justify-content-between align-items-center" style="margin-top: 10px;">
-                    <a href="{{ route('events.show',['event'=>$doyen->id]) }}" class="text-primary">En savoir plus</a>
-                    <p style="margin-bottom: 0;">{{ \Carbon\Carbon::parse($doyen->created_at)->format('D M d Y H:i') }}</p>
-                </div>
-            </div>
-        </div>
-    </div>
-@endforeach
-
-        
-        <div class="col-lg-3">
-            <div class="quick-access">
-                <h2>Accès Rapide</h2>
-                <ul>
-                <li><a href="{{ route('events') }}">Événements</a></li>
-                    <li><a href="{{ route('articles') }}">Articles</a></li>
-                    <li><a href="{{ route('departements') }}">Départements</a></li>
-                    <li><a href="{{ route('annonces') }}">Annonces</a></li>
-                    <li><a href="{{ route('services') }}">Services</a></li>
-                    
-                </ul>
-            </div>
-            <div class="row"> 
-                <div class="col-12">
-                    <div class="panel panel-default">
-                    <div class="panel-heading">
-        <h1 class="panel-title" style="font-weight: bold"><i class="fa fa-pie-chart" id="titre-panel"></i>&nbsp;STATISTIQUES</h1>
-    </div>
-    <div class="panel-body" id="biblio">
-        <ul class="list-group" style="font-size: 14px;">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                ETUDIANTS
-                <span class="badge bg-primary">11920</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                FORMATIONS
-                <span class="badge bg-primary">26</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                DEPARTEMENTS
-                <span class="badge bg-primary">13</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                LABORATOIRES
-                <span class="badge bg-primary">9</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                FORMATIONS DOCTORALES
-                <span class="badge bg-primary">6</span>
-            </li>
-        </ul>
-    </div>
-                    </div>
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h1 class="panel-title" id="titre-panel"><i class="fa fa-book" id="titre-panel"></i>&nbsp;ESPACE ETUDIANT</h1>
-                        </div>
-                        <div class="panel-body" id="biblio">
-                            <a href="" target="blank">RESULTATS</a><BR>
-                        </div>
-                    </div>
-                </div> 
-         </div>
-         <div class="row">
-            <div class="col-12">
-                <!-- Your existing content goes here -->
-            </div>
-            <div class="col-12">
-                <div class="panel panel-danger">
-                    <div class="panel-heading">
-                        <h1 class="panel-title" id="titre-panel"><i class="fa fa-edit" id="titre-panel"></i>&nbsp;Bibliothèque</h1>
-                    </div>
-                    <div class="panel-body" id="biblio">
-                        <strong>en construction</strong>
-                    </div>
-                </div>
-                <div class="panel panel-danger">
-                    <div class="panel-heading">
-                        <h1 class="panel-title" id="titre-panel"><i class="fa fa-edit" id="titre-panel"></i>&nbsp;Réclamations<br/>الشكايات</h1>
-                    </div>
-                    <div class="panel-body" id="biblio">
-                        <a href="#" target="_blank">الشكايات المتعلقة بالنتائج</a><br>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </div>
-    </div> 
-</div> 
-
-
-<!-- Include the Font Awesome stylesheet -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 <script>
-    const swiper = new Swiper('.swiper', {
-  // Optional parameters
-  direction: 'horizontal',
-  loop: true, 
-  autoplay: {
-            delay: 3000, // Time in milliseconds before the next slide is shown
-            disableOnInteraction: false, // Enable/disable autoplay on slide interaction
-        },
-  // If we need pagination
-  pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-
-  // Navigation arrows
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
-
-  // And if we need scrollbar
-  scrollbar: {
-    el: '.swiper-scrollbar',
-  },
-});
+  document.addEventListener('DOMContentLoaded', function() {
+    ClassicEditor
+      .create(document.querySelector('#description_doyen'))
+      .then(editor => {
+        window.editor = editor;
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  });
+  function handleSaveButtonClick(e) {
+    e.preventDefault();
+    document.getElementById('submitFormBtn').addEventListener('click', function() {
+      var name = document.getElementById('name_doyen').value;
+      var descriptionEditor = window.editor;
+      var description = descriptionEditor.getData();
+      var image = document.getElementById('image_doyen').files[0];
+      var date = document.getElementById('date_doyen').value;
+      var errors = [];
+      if (!name.trim()) {
+        errors.push("Name is required.");
+      }
+      if (!description.trim()) {
+        errors.push("Description is required.");
+      }
+      if (!image) {
+        errors.push("Image is required.");
+      } else {
+        var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif|\.svg|\.pdf)$/i;
+        if (!allowedExtensions.exec(image.name)) {
+          errors.push("Invalid file format. Allowed formats: jpg, jpeg, png, gif, svg, pdf.");
+        }
+        if (image.size > 2048 * 1024) {
+          errors.push("File size exceeds 2MB limit.");
+        }
+      }
+      if (!date) {
+        errors.push("Date is required.");
+      }
+      if (errors.length > 0) {
+        var errorString = errors.join("<br>");
+        var formErrors = document.getElementById('formErrors');
+        formErrors.innerHTML = errorString;
+        formErrors.style.display = "block";
+      } else {
+        console.log(errors);
+        document.getElementById('myForm').submit();
+      }
+    });
+  }
+  document.getElementById('submitFormBtn').addEventListener('click', handleSaveButtonClick);
 </script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 </body>
-@include('footer')
-
 </html>

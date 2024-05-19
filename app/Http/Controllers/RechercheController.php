@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Recherche;
-use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class RechercheController extends Controller
@@ -17,12 +17,14 @@ class RechercheController extends Controller
     public function index(): View
     {
         $recherches = Recherche::latest()->paginate(5);
-
+        
+        
         return view('recherches.index', compact('recherches'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+                    ->with('i', (request()->input('page', 1) - 1) * 5);
     }
+    
 
-
+   
     /**
      * Show the form for creating a new resource.
      *
@@ -32,7 +34,7 @@ class RechercheController extends Controller
     {
         return view('recherches.create');
     }
-
+  
     /**
      * Store a newly created resource in storage.
      *
@@ -41,15 +43,15 @@ class RechercheController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        // dd($request->all());
         $request->validate([
             'name' => 'required',
             'description' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'date' => 'required|date',
         ]);
-
-        $input = $request->all();
-
+        $input = $request->all(); 
+    
         if ($image = $request->file('image')) {
             $destinationPath = 'images/';
             $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
@@ -57,14 +59,20 @@ class RechercheController extends Controller
             $input['image'] = $profileImage;
         }
 
-        $isépingler = $request->has('épingler') ? 1 : 0;
+        $isépingler=0;
+        if ($request->has('épingler')) {
+            $isépingler=1;
+        } else {
+            $isépingler=0;
+        }
+      
         $input['special'] = $isépingler;
         Recherche::create($input);
-
+       
         return redirect()->route('recherches.index')
-            ->with('success', 'Recherche created successfully.');
+                        ->with('success', 'Recherche created successfully.');
     }
-
+  
     /**
      * Display the specified resource.
      *
@@ -75,7 +83,7 @@ class RechercheController extends Controller
     {
         return view('recherches.show', compact('recherche'));
     }
-
+  
     /**
      * Show the form for editing the specified resource.
      *
@@ -86,7 +94,7 @@ class RechercheController extends Controller
     {
         return view('recherches.edit', compact('recherche'));
     }
-
+  
     /**
      * Update the specified resource in storage.
      *
@@ -101,9 +109,9 @@ class RechercheController extends Controller
             'description' => 'required',
             'date' => 'required|date',
         ]);
-
+    
         $input = $request->all();
-
+    
         if ($image = $request->file('image')) {
             $destinationPath = 'images/';
             $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
@@ -112,13 +120,13 @@ class RechercheController extends Controller
         } else {
             unset($input['image']);
         }
-
+            
         $recherche->update($input);
-
-        return redirect()->route('recherches.index')
-            ->with('success', 'Recherche has been updated successfully.');
+      
+        return redirect()->route('recherche.index')
+                        ->with('success', 'Recherche has been updated successfully.');
     }
-
+  
     /**
      * Remove the specified resource from storage.
      *
@@ -128,40 +136,44 @@ class RechercheController extends Controller
     public function destroy(Recherche $recherche): RedirectResponse
     {
         $recherche->delete();
-
+         
         return redirect()->route('recherches.index')
-            ->with('success', 'Recherche has been deleted successfully.');
+                        ->with('success', 'Recherche has been deleted successfully.');
     }
 
-    public function recherches(Request $request)
-    {
-        $recherchesEpingler = Recherche::where('special', 1)->orderBy('created_at', 'desc')->get();
+public function recherches(Request $request)
+{
+    // Get pinned recherche
+    $recherchesEpingler = Recherche::where('special', 1)->orderBy('created_at', 'desc')->get();
+    
+    // Get non-pinned recherche
+    $recherchesNonEpingler = Recherche::where('special', 0)->orderBy('created_at', 'desc')->get();
+    
+    // Merge the collections
+    $recherches=  Recherche::where('carousel', 1)->get();
+    
+    // Pass the merged collection to the view
+    return view('recherches.recherches', compact('recherches', 'recherchesNonEpingler', 'recherchesEpingler'));
+}
 
-        // Récupérer les autres annonces
-        $recherchesNonEpingler = Recherche::where('special', 0)->orderBy('created_at', 'desc')->get();
-
-        // Fusionner les collections
-        $recherches = Recherche::where('carousel', 1)->get();
-        return view('recherches.recherches', compact('recherches', 'recherchesEpingler', 'recherchesNonEpingler'));
-    }
-
-    public function updateCheckbox(Request $request)
+public function updateCheckbox(Request $request)
     {
         $id = $request->id;
         $field = $request->field;
 
-        $recherche = Recherche::find($id);
-        if (!$recherche) {
+        $Recherche = Recherche::find($id);
+        if (!$Recherche) {
             return response()->json(['error' => 'Recherche not found.']);
         }
 
         // Invert the value of the checkbox field
-        $recherche->$field = !$recherche->$field;
+        $Recherche->$field = !$Recherche->$field;
 
-        if ($recherche->save()) {
+        if ($Recherche->save()) {
             return response()->json(['success' => 'Checkbox updated successfully.']);
         } else {
             return response()->json(['error' => 'Failed to update checkbox.']);
         }
-    }
+    } 
+
 }

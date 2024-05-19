@@ -36,7 +36,7 @@
         <a href="{{ route('admin.articles') }}" class="list-group-item list-group-item-action">Add article</a>
         <a href="{{ route('admin.departements') }}" class="list-group-item list-group-item-action">Add departments</a>
         <a href="{{ route('admin.events') }}" class="list-group-item list-group-item-action">Add Event</a>
-        <a href="#" class="list-group-item list-group-item-action">Add Mot de doyen</a>
+        <a href="{{ route('admin.doyens') }}" class="list-group-item list-group-item-action ">Add Mot de doyen</a>
         <a href="{{ route('admin.services') }}" class="list-group-item list-group-item-action">Add service</a>
         <a href="{{ route('admin.formations') }}" class="list-group-item list-group-item-action">Add Formation</a>
         <a href="{{ route('admin.recherches') }}" class="list-group-item list-group-item-action">Add Recherche</a>

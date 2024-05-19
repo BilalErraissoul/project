@@ -10,17 +10,18 @@
         /* Custom Styles */
         .header-container {
             background-color: #001229; /* Darker blue background color */
-            padding: 10px 0;
+            padding: 5px 0;
         }
 
         .logo {
-            font-size: 28px;
+            font-size: 20px;
             font-family: 'Arial Black', sans-serif;
             color: #fff;
             background-color: #87ceeb; /* Ciel blue background color */
             padding: 5px 0px; /* Adjust padding as needed */
             border-radius: 5px; /* Optional: Add border-radius for rounded corners */
             margin-right: auto;
+        
         }
 
         .navbar-nav .nav-link {
@@ -64,13 +65,14 @@
 <body>
 
 <header>
-    <div class="container-fluid header-container">
+    <div class="container-fluid header-container ">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-auto col-12">
-                    <h1 class="logo">UCD-FS</h1>
+            <div class="row align-items-left">
+                <div class="col-md-auto col-2">
+                    <h1 class="logo">UCD FS</h1>
+
                 </div>
-                <div class="col-md col-12">
+                <div class="col-md col-5">
                     <nav class="navbar navbar-expand-lg navbar-dark p-0">
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>

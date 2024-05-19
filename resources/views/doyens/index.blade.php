@@ -1,13 +1,14 @@
 @extends('doyens.layout')
      
 @section('content')
+
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>MOT DU DOYEN</h2>
+                <h2>LISTES DES DOYENS</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('doyens.create') }}"> Create New doyen</a>
+                <a class="btn btn-success" href="{{ route('doyens.create') }}"> Créer un nouveau doyen</a>
             </div>
         </div>
     </div>
@@ -22,12 +23,12 @@
         <tr>
             <th>Id</th>
             <th>Image</th>
-            <th>Name</th>
+            <th>Nom</th>
             <th>Description</th>
             <th>Date</th>
             <th width="280px">Action</th>
         </tr>
-        @foreach ($events as $event)
+        @foreach ($doyens as $doyen)
         <tr>
             <td>{{ $doyen->id }}</td>
             <td><img src="/images/{{ $doyen->image }}" width="100px"></td>
@@ -35,18 +36,18 @@
             <td>{!! $doyen->description !!}</td>
             <td>{{ $doyen->date }}</td>
             <td>
-                <form action="{{ route('doyens.destroy',$event->id) }}" method="POST">
-                    <a class="btn btn-info" href="{{ route('doyen.show',$doyen->id) }}">Show</a>
-                    <a class="btn btn-primary" href="{{ route('doyen.edit',$doyen->id) }}">Edit</a>
+                <form action="{{ route('doyens.destroy',$doyen->id) }}" method="POST">
+                    <a class="btn btn-info" href="{{ route('doyens.show',$doyen->id) }}">Afficher</a>
+                    <a class="btn btn-primary" href="{{ route('doyens.edit',$doyen->id) }}">Modifier</a>
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="submit" class="btn btn-danger">Supprimer</button>
                 </form>
             </td>
         </tr>
         @endforeach
     </table>
     
-    {!! $events->links() !!}
+    {!! $doyens->links() !!}
         
 @endsection
